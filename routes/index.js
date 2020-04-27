@@ -1,9 +1,72 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
+const Course = require("../models/Course");
+const Category = require("../models/Category");
+const User = require("../models/User");
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+/*Landing Page */
+router.get("/", function (req, res, next) {
+  res.render("landing");
+});
+
+//Log-in
+router.get("/signin", function (req, res, next) {
+  res.render("log-in");
+});
+
+//Sign-up
+router.get("/signup", function (req, res, next) {
+  res.render("sign-up");
+});
+
+//Homepage
+router.get("/index", function (req, res, next) {
+  res.render("index");
+});
+
+//Homepage -id
+router.get("/index/:id", (res, req) => {
+  Course.findById(req.params.id)
+    .then((dbRes) => {
+      res.render("index-id", {
+        course: dbRes,
+      });
+    })
+    .catch((dbErr) => {
+      console.log(dbErr);
+    });
+});
+
+//mon profil
+router.get("/profile", (req, res) => {
+  res.render("profile");
+});
+
+//mes cours
+router.get("/mycourses", (req, res) => {
+  res.render("my-courses");
+});
+
+router.get("/mycourse/:id", (res, req) => {
+  Course.findById(req.params.id)
+    .then((dbRes) => {
+      res.render("mycourse", {
+        course: dbRes,
+      });
+    })
+    .catch((dbErr) => {
+      console.log(dbErr);
+    });
+});
+
+//create course
+router.get("/create", function (req, res, next) {
+  res.render("create-course");
+});
+
+//create course form
+router.get("/add", function (req, res, next) {
+  res.render("create-course-form");
 });
 
 module.exports = router;
