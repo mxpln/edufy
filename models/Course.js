@@ -7,7 +7,7 @@ const courseSchema = new Schema({
   image: String,
   date: Date,
   category: {
-    type: Schema.Types.ObjectId,
+    type: [Schema.Types.ObjectId],
     ref: "Category",
   },
   participants: {

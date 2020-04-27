@@ -9,16 +9,6 @@ router.get("/", function (req, res, next) {
   res.render("landing");
 });
 
-//Log-in
-router.get("/signin", function (req, res, next) {
-  res.render("log-in");
-});
-
-//Sign-up
-router.get("/signup", function (req, res, next) {
-  res.render("sign-up");
-});
-
 //Homepage
 router.get("/index", function (req, res, next) {
   res.render("index");
@@ -65,8 +55,8 @@ router.get("/create", function (req, res, next) {
 });
 
 //create course form
-router.get("/add", function (req, res, next) {
-  res.render("create-course-form");
-});
+// router.get("/add", function (req, res, next) {
+//   res.render("create-course-form");
+// });
 
 module.exports = router;

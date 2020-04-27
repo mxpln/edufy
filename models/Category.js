@@ -5,6 +5,6 @@ const categorySchema = new Schema({
   category: String,
 });
 
-const Category = mongoose.model("category", categorySchema);
+const Category = mongoose.model("Category", categorySchema);
 
 module.exports = Category;
