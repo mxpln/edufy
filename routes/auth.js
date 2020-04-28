@@ -16,9 +16,11 @@ router.post("/signup", upload.single("image"), (req, res) => {
   User.findOne({ email: email })
     .then((foundUser) => {
       if (foundUser) {
-        res.redirect("/auth/signup");
+        res.render("sign-up", {
+          errorMessage: "Email already exists",
+        });
+        return;
       } else {
-        console.log(req.file);
         const salt = 10;
         const hashedPassword = bcrypt.hashSync(password, salt);
         const newUser = {
@@ -45,17 +47,17 @@ router.post("/signup", upload.single("image"), (req, res) => {
     });
 });
 router.post("/login", (req, res, next) => {
-  const theUsername = req.body.username;
+  const theEmail = req.body.email;
   const thePassword = req.body.password;
 
-  if (theUsername === "" || thePassword === "") {
+  if (theEmail === "" || thePassword === "") {
     res.render("log-in", {
       errorMessage: "Please enter both, username and password to sign up.",
     });
     return;
   }
 
-  User.findOne({ username: theUsername })
+  User.findOne({ email: theEmail })
     .then((user) => {
       if (!user) {
         res.render("log-in", {

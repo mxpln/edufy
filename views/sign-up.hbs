@@ -26,3 +26,6 @@
     </div>
     <button type="submit" form="signup" value="Submit">Submit</button>
 </form>
+{{#if errorMessage }}
+<div class="error-message">{{ errorMessage }}</div>
+{{/if}}

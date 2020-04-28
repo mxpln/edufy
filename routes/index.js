@@ -27,15 +27,4 @@ router.get("/index/:id", (res, req) => {
     });
 });
 
-//mon profil
-router.get("/profile", (req, res) => {
-  res.render("profile");
-});
-
-
-
-
-
-
-
 module.exports = router;

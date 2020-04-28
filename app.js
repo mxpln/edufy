@@ -37,7 +37,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     // secret: process.env.CLOUDINARY_SECRET,
     cookie: {
-      // maxAge: 600000,
+      maxAge: 600000,
     }, // in millisec
     store: new MongoStore({
       mongooseConnection: mongoose.connection,
