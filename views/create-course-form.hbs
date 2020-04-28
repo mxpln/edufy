@@ -3,64 +3,63 @@
 
 <form action="/courses/add" method="POST" enctype="multipart/form-data">
 
-{{#if msg}}
+    {{#if msg}}
     <p class="msg {{msg.statu}}">{{msg.txt}}</p>
-{{/if}}
+    {{/if}}
 
-<h3>Add a course</h3>
+    <h3>Add a course</h3>
 
-<div>
-<label for="image">Photo</label>
-<input id="image" type="file" name="image">
-</div>
+    <div>
+        <label for="image">Photo</label>
+        <input id="image" type="file" name="image">
+    </div>
 
+    <div>
+        <label for="title">title</label>
+        <input id="title" type="text" name="title" placeholder="Title">
+    </div>
 
-<div>
-<label for="title">title</label>
-<input id="title" type="text" name="title" placeholder="Title">
-</div>
+    <div>
+        <label for="description">Description</label>
+        <input id="description" type="text" name="description" placeholder="Description">
+    </div>
 
-<div>
-<label for="description">Description</label>
-<input id="description" type="text" name="description" placeholder="Description">
-</div>
+    <div>
+        <label for="price">Price</label>
+        <input id="price" type="number" name="price" placeholder="€" min="10">
+    </div>
 
-<div>
-<label for="price">Price</label>
-<input id="price" type="number" name="price" placeholder="€" min="10">
-</div>
+    <div>
+        no date in the past
+        <label for="date">Date</label>
+        <input id="date" type="datetime-local" name="date">
+    </div>
 
-<div>
-    no date in the past
-<label for="date">Date</label>
-<input id="date" type="datetime-local" name="date" > 
-</div>
+    <div>
+        <label for="minPeople">Min Attentees</label>
+        <input id="minPeople" type="number" name="minPeople" placeholder="Minimum 5" min="0" "500">
+    </div>
 
-<div>
-<label for="minPeople">Min Attentees</label>
-<input id="minPeople" type="number" name="minPeople" placeholder="Minimum 5" min="0" "500">
-</div>
+    <div>
+        <label for="maxPeople">Max Attentees</label>
+        <input id="maxPeople" type="number" name="maxPeople" placeholder="Maximum 100" min="0" max="500">
+    </div>
 
-<div>
-<label for="maxPeople">Max Attentees</label>
-<input id="maxPeople" type="number" name="maxPeople" placeholder="Maximum 100" min="0" max="500">
-</div>
+    <div>
+        <label for="place">Location/link</label>
+        <input id="location" type="string" name="place" placeholder="Link or location for the event">
+    </div>
 
-<div>
-<label for="place">Location/link</label>
-<input id="location" type="string" name="place" placeholder="Link or location for the event">
-</div>
+    <div>
+        <label for="category">Category</label>
+        <select name="category" id="category" class="select">
+            <option value="" disabled selected>Choose a category</option>
+            {{#each categories}}
+            <option value="{{this._id}}">{{this.category}}</option>
+            {{/each}}
+        </select>
+    </div>
 
-<div>
-<label for="category">Category</label> 
-<select name="id_cat" id="category" class="select">
-    <option value="-1" disabled selected>Choose a category</option>
-    {{#each categories}}
-    <option data-category-id="{{this._id}}">{{this.category}}</option>
-    {{/each}}
-</select>
-</div>
-
-<button class="btn">Add this course</button>
+    <button class="btn">Add this course</button>
 
 </form>

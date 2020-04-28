@@ -1,4 +1,4 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 const Category = require("../models/Category.js");
 const Course = require("../models/Course.js");
@@ -6,31 +6,32 @@ const upload = require("../config/cloudinary");
 
 //get prof courses (dashboard)
 router.get("/prof", function (req, res, next) {
-  Course.find({})
-  .then((dbRes) => {
-    res.render("prof-courses", {
-      courses : dbRes,
-    });
-  })
-  .catch((err) => {
-    console.log(err);
-  })
+  Category.find().then((dbResCat) => {
+    Course.find({})
+      .populate("category")
+      .then((dbRes) => {
+        res.render("prof-courses", {
+          courses: dbRes,
+          category: dbResCat,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+
   // res.render("prof-courses");
 });
 
-
-
 /* GET Course form. */
-router.get('/add', function (req, res, next) {
+router.get("/add", function (req, res, next) {
   Category.find()
     .then((categories) => {
-      res.render('create-course-form.hbs', {
-        categories
-      })
+      res.render("create-course-form.hbs", {
+        categories,
+      });
     })
     .catch(next);
-
-
 });
 //POST course form
 
@@ -44,8 +45,7 @@ router.get('/add', function (req, res, next) {
 //   });
 // });
 
-
-router.post('/add', upload.single('image'), (req, res, next) => {
+router.post("/add", upload.single("image"), (req, res, next) => {
   const {
     title,
     description,
@@ -54,7 +54,7 @@ router.post('/add', upload.single('image'), (req, res, next) => {
     minPeople,
     maxPeople,
     place,
-    id_cat
+    category,
   } = req.body;
   const image = req.file.url;
   const newCourse = new Course({
@@ -66,29 +66,22 @@ router.post('/add', upload.single('image'), (req, res, next) => {
     maxPeople,
     place,
     image,
-    id_cat
+    category,
   });
-  newCourse.save()
-    .then(dbRes => {
-      console.log("heeere");
-      res.redirect('/courses/prof');
+  newCourse
+    .save()
+    .then((dbRes) => {
+      res.redirect("/courses/prof");
     })
-    .catch(error => {
+    .catch((error) => {
       console.log(error);
     });
 });
-
-
-
-
-
-
 
 //get student courses
 router.get("/student", (req, res) => {
   res.render("my-courses");
 });
-
 
 //get student courses ID
 router.get("/student/:id", (res, req) => {
@@ -102,7 +95,5 @@ router.get("/student/:id", (res, req) => {
       console.log(dbErr);
     });
 });
-
-
 
 module.exports = router;
