@@ -6,6 +6,7 @@ var logger = require("morgan");
 var sassMiddleware = require("node-sass-middleware");
 require("dotenv").config();
 require("./config/mongodb");
+const hbs = require("hbs")
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -13,14 +14,21 @@ const coursesRouter = require("./routes/courses");
 const authRouter = require("./routes/auth");
 
 var app = express();
+hbs.registerHelper("formatDateForInput", function (date, compare, options) {
 
+  if (compare === "current") return new Date(date).toISOString().substring(0, 16);
+  if (compare === "min") return new Date().toISOString().substring(0, 16);
+
+})
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({
+  extended: false
+}));
 app.use(cookieParser());
 app.use(
   sassMiddleware({

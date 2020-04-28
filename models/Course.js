@@ -6,6 +6,7 @@ const courseSchema = new Schema({
   description: String,
   image: String,
   date: Date,
+  // time: Date,
   category: {
     type: Schema.Types.ObjectId,
     ref: "Category",

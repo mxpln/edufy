@@ -1,1 +1,18 @@
 <h1>my-Course -id</h1>
+
+<h2>TITLE : {{course.title}}</h2>
+<p>DESCRIPTION :{{course.description}}</p>
+<img src="{{course.image}}" alt="img" />
+<p>DATE : {{course.date}}</p>
+<p>PRICE : {{course.price}}</p>
+<p>CATEGORY : {{course.category.category}}</p>
+<p>PARTICIPANTS : {{course.participants}}</p>
+<p>PLACE : {{course.place}}</p>
+<p>MINPEOPLE : {{course.minPeople}}</p>
+<p>MAXPEOPLE : {{course.maxPeople}}</p>
+
+<button><a href="/courses/{{course._id}}/edit">EDIT</a></button>
+
+<form action="/courses/{{course._id}}/delete" method="POST">
+    <button>Delete this course</button>
+</form>

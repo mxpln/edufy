@@ -12,4 +12,11 @@
 <h3>{{this.place}}</h3>
 <img src="{{this.image}}" alt="img" />
 <h3>{{this.category.category}}</h3>
+
+{{!-- <form action="edit/{{this._id}}" method="GET">
+<button> Edit this course</button>
+</form> --}}
+<a href="/courses/{{this._id}}">voir ce cours</a>
+
+
 {{/each}}

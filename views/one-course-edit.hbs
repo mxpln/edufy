@@ -1,0 +1,72 @@
+<h2>Edit this course</h2>
+
+<form action="/courses/{{course._id}}/edit" method="POST" enctype="multipart/form-data">
+
+    {{#if msg}}
+    <p class="msg {{msg.status}}">{{msg.txt}}</p>
+    {{/if}}
+
+
+    <img src="{{course.image}}" alt="img" />
+    <label for="image">Change photo</label>
+    <input id="image" type="file" name="image">
+
+    <div>
+        <label for="title">title</label>
+        <input id="title" type="text" name="title" placeholder="Title" value='{{course.title}}'>
+    </div>
+
+    <div>
+        <label for="description">Description</label>
+        <input id="description" type="text" name="description" placeholder="Description" value="{{course.description}}">
+    </div>
+
+    <div>
+        <label for="price">Price</label>
+        <input id="price" type="number" name="price" placeholder="€" min="10" value='{{course.price}}'>
+    </div>
+
+    <div>
+        <label for="date">Date</label>
+        <input id="date" type="datetime-local" min="{{formatDateForInput course.date "min"}}" name="date"
+            value="{{formatDateForInput course.date "current"}}">
+    </div>
+
+    {{!-- <div>
+        <label for="time">Time</label>
+        <input id="time" type="time" name="time" value={{course.time}}>
+    </div> --}}
+
+    <div>
+        <label for="minPeople">Min Attentees</label>
+        <input id="minPeople" type="number" name="minPeople" placeholder="Minimum 5" min="0" "500"
+            value={{course.minPeople}}>
+    </div>
+
+    <div>
+        <label for="maxPeople">Max Attentees</label>
+        <input id="maxPeople" type="number" name="maxPeople" placeholder="Maximum 100" min="0" max="500"
+            value="{{course.maxPeople}}">
+    </div>
+
+    <div>
+        <label for="place">Location/link</label>
+        <input id="location" type="string" name="place" placeholder="Link or location for the event"
+            value="{{course.place}}">
+    </div>
+
+    <div>
+        <label for="category">Category</label>
+        <select name="category" id="category" class="select">
+            <option value="{{course.category}}" disabled selected>{{course.category.category}}</option>
+            {{#each category}}
+            <option value="{{this._id}}">{{this.category}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    <button class="btn">Update this course</button>
+
+
+
+</form>
