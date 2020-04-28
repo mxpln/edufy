@@ -34,15 +34,15 @@ router.post("/profile/edit/:id", upload.single("image"), (req, res) => {
   if (req.file) {
     const { name, lastname, username, email, password } = req.body;
     const image = req.file.url;
-    const salt = 10;
-    const hashedPassword = bcrypt.hashSync(password, salt);
+    // const salt = 10;
+    // const hashedPassword = bcrypt.hashSync(password, salt);
     editedProfile = {
       name,
       lastname,
       username,
       email,
       image,
-      password: hashedPassword,
+      // password: hashedPassword,
     };
   } else {
     editedProfile = req.body;
