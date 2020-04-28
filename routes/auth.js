@@ -44,5 +44,37 @@ router.post("/signup", upload.single("image"), (req, res) => {
       console.log(dbErr);
     });
 });
+router.post("/login", (req, res, next) => {
+  const theUsername = req.body.username;
+  const thePassword = req.body.password;
+
+  if (theUsername === "" || thePassword === "") {
+    res.render("log-in", {
+      errorMessage: "Please enter both, username and password to sign up.",
+    });
+    return;
+  }
+
+  User.findOne({ username: theUsername })
+    .then((user) => {
+      if (!user) {
+        res.render("log-in", {
+          errorMessage: "The username doesn't exist.",
+        });
+        return;
+      }
+      if (bcrypt.compareSync(thePassword, user.password)) {
+        req.session.currentUser = user;
+        res.redirect("/");
+      } else {
+        res.render("log-in", {
+          errorMessage: "Incorrect password",
+        });
+      }
+    })
+    .catch((error) => {
+      next(error);
+    });
+});
 
 module.exports = router;

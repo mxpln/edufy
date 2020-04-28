@@ -6,11 +6,13 @@ var logger = require("morgan");
 var sassMiddleware = require("node-sass-middleware");
 require("dotenv").config();
 require("./config/mongodb");
-
+const session = require("express-session");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
+const mongoose = require("mongoose");
 const coursesRouter = require("./routes/courses");
 const authRouter = require("./routes/auth");
+const MongoStore = require("connect-mongo")(session);
 
 var app = express();
 
@@ -28,6 +30,21 @@ app.use(
     dest: path.join(__dirname, "public"),
     indentedSyntax: true, // true = .sass and false = .scss
     sourceMap: true,
+  })
+);
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    // secret: process.env.CLOUDINARY_SECRET,
+    cookie: {
+      // maxAge: 600000,
+    }, // in millisec
+    store: new MongoStore({
+      mongooseConnection: mongoose.connection,
+      ttl: 24 * 60 * 60, // 1 day
+    }),
+    saveUninitialized: true,
+    resave: true,
   })
 );
 app.use(express.static(path.join(__dirname, "public")));
