@@ -1,1 +1,11 @@
 <h1>Profile</h1>
+{{#if user.image }}
+<img src="{{user.image}}" alt="">
+{{/if}}
+
+<div>{{user.name}}</div>
+<div>{{user.lastname}}</div>
+<div>{{user.username}}</div>
+<div>{{user.email}}</div>
+
+<a href="/users/profile/edit">Edit my profile</a>

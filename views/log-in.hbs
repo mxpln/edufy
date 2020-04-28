@@ -1,1 +1,18 @@
 <h1>Sign in</h1>
+{{#if errorMessage }}
+<div class="error-message">{{ errorMessage }}</div>
+{{/if}}
+<form method="post" action="/auth/login">
+
+    <label for="email"></label>
+    <input name="email" type="text" value="admin@edufy.com">
+    <label for="password"></label>
+    <input name="password" type="password" value="123">
+
+    <button>Sign in</button>
+    <hr>
+
+    <p>
+        No account yet ? <a class="link" href="/auth/signup">please signup !</a>
+    </p>
+</form>

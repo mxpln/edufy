@@ -1,0 +1,29 @@
+<h1>Profile edit</h1>
+
+<form action="/users/profile/edit/{{user._id}}" method="post" id="profile-edit" enctype="multipart/form-data">
+    <div>
+        <label for="image">Image</label>
+        <input type="file" name="image">
+    </div>
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" name="name" value="{{user.name}}">
+    </div>
+    <div>
+        <label for="lastname">Lastname:</label>
+        <input type="text" name="lastname" value="{{user.lastname}}">
+    </div>
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" name="username" value="{{user.username}}">
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" name="email" value="{{user.email}}">
+    </div>
+    {{!-- <div>
+        <label for="password">Password:</label>
+        <input type="password" name="password" value="{{user.password}}">
+    </div> --}}
+    <button type="submit" form="profile-edit" value="Submit">Submit</button>
+</form>
