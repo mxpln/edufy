@@ -12,9 +12,9 @@ const storage = cloudinaryStorage({
   cloudinary: cloudinary,
   folder: "samples",
   allowedFormats: ["jpg", "png"],
-  filename: function (req, file, cb) {
-    cb(null, file.originalname);
-  },
+  // filename: function (req, file, cb) {
+  //   cb(null, file.originalname);
+  // },
 });
 
 const uploadCloud = multer({ storage: storage });
