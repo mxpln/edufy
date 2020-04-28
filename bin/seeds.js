@@ -10,32 +10,32 @@ const Category = require('../models/Category');
 //   password: String,
 //   image: String,
 
-// const myUser = [
-//   {
-//     name: "Tatijana",
-//     lastname: "Rajcic",
-//     username: "tatiraj",
-//     email: "tatijana@ironhack.com",
-//     password: "12345",
-//     image: "",
-//   },
-//   {
-//     name: "Henry",
-//     lastname: "Charles",
-//     username: "H77",
-//     email: "henry@gmail.com",
-//     password: "12345",
-//     image: "",
-//   },
-//   {
-//     name: "Logan",
-//     lastname: "Smith",
-//     username: "Lolo",
-//     email: "logan@gmail.com",
-//     password: "12345",
-//     image: "",
-//   },
-// ];
+const myUser = [
+  {
+    name: "Tatijana",
+    lastname: "Rajcic",
+    username: "tatiraj",
+    email: "tatijana@ironhack.com",
+    password: "12345",
+    image: "",
+  },
+  {
+    name: "Henry",
+    lastname: "Charles",
+    username: "H77",
+    email: "henry@gmail.com",
+    password: "12345",
+    image: "",
+  },
+  {
+    name: "Logan",
+    lastname: "Smith",
+    username: "Lolo",
+    email: "logan@gmail.com",
+    password: "12345",
+    image: "",
+  },
+];
 
 // const myCourse = [
 //   {
@@ -55,23 +55,23 @@ const Category = require('../models/Category');
 // ];
 
 
-const categories = [
-  {
-    category : "Music",
-  },
-  {
-    category: "Science",
-  },
-  {
-  category : "Web Developpement",
-  },
-  {
-  category : "DIY"
-  },
-  {
-  category : "Photo"
-  }
-]
+// const categories = [
+//   {
+//     category : "Music",
+//   },
+//   {
+//     category: "Science",
+//   },
+//   {
+//   category : "Web Developpement",
+//   },
+//   {
+//   category : "DIY"
+//   },
+//   {
+//   category : "Photo"
+//   }
+// ]
 
 mongoose
   .connect("mongodb://localhost/edufy", { useNewUrlParser: true })
@@ -79,7 +79,7 @@ mongoose
     console.log(`Connected to ${self.connection.name}`);
 
     // Seeds
-    Category.create(categories)
+    User.create(myUser)
       .then((dbResponse) => {
         console.log(dbResponse);
       })
