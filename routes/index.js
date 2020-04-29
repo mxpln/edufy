@@ -11,19 +11,70 @@ router.get("/", function (req, res, next) {
 
 //Homepage
 router.get("/index", function (req, res, next) {
-  Category.find().then((dbResCat) => {
-    Course.find({})
-      .populate("category")
-      .then((dbRes) => {
-        res.render("index", {
-          courses: dbRes,
-          category: dbResCat,
+  let dateSort = {
+    date: +1
+  };
+  let filter = {}
+  console.log(req.query.from)
+
+  if (req.query.category) {
+    filter.category = req.query.category;
+  }
+  if ((req.query.from) && (req.query.to)) {
+    filter = {
+      $and: [{
+        date: {
+          $gte: new Date(req.query.from).toISOString()
+        }
+      }, {
+        date: {
+          $lte: new Date(req.query.to).toISOString()
+        }
+      }]
+    };
+  }
+  if ((req.query.category) && ((req.query.from) && (req.query.to))) {
+    // filter.category = req.query.category;
+    filter = {
+      $and: [{
+        date: {
+          $gte: new Date(req.query.from).toISOString()
+        }
+      }, {
+        date: {
+          $lte: new Date(req.query.to).toISOString()
+        }
+      }, {
+        category: req.query.category
+      }]
+    };
+  }
+  Category.find()
+    .then((dbResCat) => {
+      Course
+        .find(filter)
+        .sort(dateSort)
+        .populate("category")
+        .then((dbRes) => {
+          // let finalArr = []
+          // let arrayDates = dbRes.map(oneCourse => oneCourse.date)
+          // console.log(arrayDates)
+          // arrayDates.forEach(date=> {
+          //   let clusteredCourses =  dbRes.filter(oneCourse => oneCourse.date === date)
+          //   finalArr.push(clusteredCourses)
+          // })
+
+          // console.log("final",finalArr)
+
+          res.render("index", {
+            courses: dbRes,
+            category: dbResCat,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+    });
 });
 
 
@@ -40,21 +91,17 @@ router.get("/:id", function (req, res, next) {
   });
 });
 
+router.post("/search/:id", (req, res, next) => {
+  Category.findById(req.params.id)
+    .then((dbRes) => {
+      res.render("search-result", {
+        category: dbRes
+      });
+    });
+});
 
-// res.render("index");
 
-//Homepage -id
-// router.get("/index/:id", (res, req) => {
-//   Course.findById(req.params.id)
-//     .then((dbRes) => {
-//       res.render("index-id", {
-//         course: dbRes,
-//       });
-//     })
-//     .catch((dbErr) => {
-//       console.log(dbErr);
-//     });
-// });
+
 
 //mon profil
 router.get("/profile", (req, res) => {
@@ -68,4 +115,3 @@ router.get("/profile", (req, res) => {
 
 
 module.exports = router;
-
