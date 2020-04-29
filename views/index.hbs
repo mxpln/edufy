@@ -5,7 +5,6 @@
 
 <p>Chercher un cours</p>
 
-
 {{#each courses}}
 <div>
     <img src="{{this.image}}" alt="IMG">
@@ -26,8 +25,11 @@
             <p>CATEGORY: {{this.category.category}}</p>
         </li>
         <li>
-            <p>Participants : {{this.participants}}</p>
+            {{#each participants}}
+            <p>{{this.name}}</p>
+            {{/each}}
         </li>
+
         <li>
             <p>Place :{{this.place}}</p>
         </li>

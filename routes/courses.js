@@ -1,9 +1,20 @@
 var express = require("express");
 var router = express.Router();
 const Category = require("../models/Category.js");
+const User = require("../models/User");
 const Course = require("../models/Course.js");
 const upload = require("../config/cloudinary");
 
+router.get("/student", (req, res) => {
+  User.findById(req.session.currentUser._id)
+    .populate("courses")
+    .then((dbResUser) => {
+      res.render("my-courses", { user: dbResUser, courses: dbResUser.courses });
+    })
+    .catch((dbError) => {
+      console.log(dbError);
+    });
+});
 //get prof courses (dashboard)
 router.get("/prof", function (req, res, next) {
   Category.find().then((dbResCat) => {
@@ -150,6 +161,47 @@ router.post("/:id/delete", (req, res, next) => {
   Course.findByIdAndDelete(req.params.id)
     .then((dbRes) => {
       res.redirect("/courses/prof");
+    })
+    .catch((dbErr) => {
+      console.log(dbErr);
+    });
+});
+router.post("/:id/add", (req, res) => {
+  Course.findByIdAndUpdate(req.params.id, {
+    $addToSet: { participants: req.session.currentUser._id },
+  })
+    .then((dbRes) => {
+      User.findByIdAndUpdate(req.session.currentUser._id, {
+        $addToSet: { courses: req.params.id },
+      })
+        .then((dbResUser) => {
+          req.session.currentUser = dbResUser;
+          res.redirect("/index");
+        })
+        .catch((dbErr) => {
+          console.log(dbErr);
+        });
+    })
+    .catch((dbErr) => {
+      console.log(dbErr);
+    });
+});
+
+router.post("/:id/remove", (req, res) => {
+  Course.findByIdAndUpdate(req.params.id, {
+    $pull: { participants: req.session.currentUser._id },
+  })
+    .then((dbRes) => {
+      User.findByIdAndUpdate(req.session.currentUser._id, {
+        $pull: { courses: req.params.id },
+      })
+        .then((dbResUser) => {
+          req.session.currentUser = dbResUser;
+          res.redirect("/courses/student");
+        })
+        .catch((dbErr) => {
+          console.log(dbErr);
+        });
     })
     .catch((dbErr) => {
       console.log(dbErr);

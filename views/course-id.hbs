@@ -18,9 +18,11 @@
         <li>
             <p>CATEGORY: {{course.category.category}}</p>
         </li>
+        {{#each participants}}
         <li>
-            <p>Participants : {{course.participants}}</p>
+            <p>Participants :{{this.name}}</p>
         </li>
+        {{/each}}
         <li>
             <p>Place :{{course.place}}</p>
         </li>
@@ -31,5 +33,14 @@
             <p>Max people : {{course.maxPeople}}</p>
         </li>
     </ul>
-    <button>Add to my courses</button>
+    {{#if hasCourse}}
+    <form action="/courses/{{course._id}}/remove" method="POST">
+        <button>Remove this course</button>
+    </form>
+    {{else}}
+    <form action="/courses/{{course._id}}/add" method="POST">
+        <button>Add this course</button>
+    </form>
+    {{/if}}
+
 </div>

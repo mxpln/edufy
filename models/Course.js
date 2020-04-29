@@ -11,10 +11,7 @@ const courseSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "Category",
   },
-  participants: {
-    type: Schema.Types.ObjectId,
-    ref: "User",
-  },
+  participants: [{ type: Schema.Types.ObjectId, ref: "User" }],
   price: Number,
   place: String,
   minPeople: Number,

@@ -1,4 +1,18 @@
 <h1>My courses</h1>
+{{#each courses}}
+<h3>{{this.title}}</h3>
+<h3>{{this.description}}</h3>
+<h3>{{this.price}}</h3>
+<h3>{{this.date}}</h3>
+<h3>{{this.minPeople}}</h3>
+<h3>{{this.maxPeople}}</h3>
+<h3>{{this.place}}</h3>
+<img src="{{this.image}}" alt="img" />
+<h3>{{this.category.category}}</h3>
 
-<h2>Passés / a venir</h2>
+{{!-- <form action="edit/{{this._id}}" method="GET">
+<button> Edit this course</button>
+</form> --}}
+<a href="/{{this._id}}">voir ce cours</a>
 
+{{/each}}

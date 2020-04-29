@@ -64,6 +64,7 @@ function checkloginStatus(req, res, next) {
   // access this value @ {{isLoggedIn}} in .hbs
   next(); // continue to the requested route
 }
+
 app.use(checkloginStatus);
 app.use(express.static(path.join(__dirname, "public")));
 

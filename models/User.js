@@ -6,6 +6,7 @@ const userSchema = new Schema({
   lastname: String,
   username: String,
   email: String,
+  courses: [{ type: Schema.Types.ObjectId, ref: "Course" }],
   password: String,
   image: {
     type: String,
