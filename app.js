@@ -6,7 +6,7 @@ var logger = require("morgan");
 var sassMiddleware = require("node-sass-middleware");
 require("dotenv").config();
 require("./config/mongodb");
-const hbs = require("hbs")
+const hbs = require("hbs");
 
 const session = require("express-session");
 var indexRouter = require("./routes/index");
@@ -18,20 +18,21 @@ const MongoStore = require("connect-mongo")(session);
 
 var app = express();
 hbs.registerHelper("formatDateForInput", function (date, compare, options) {
-
-  if (compare === "current") return new Date(date).toISOString().substring(0, 16);
+  if (compare === "current")
+    return new Date(date).toISOString().substring(0, 16);
   if (compare === "min") return new Date().toISOString().substring(0, 16);
-
-})
+});
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "hbs");
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({
-  extended: false
-}));
+app.use(
+  express.urlencoded({
+    extended: false,
+  })
+);
 app.use(cookieParser());
 app.use(
   sassMiddleware({
@@ -56,6 +57,14 @@ app.use(
     resave: true,
   })
 );
+function checkloginStatus(req, res, next) {
+  res.locals.user = req.session.currentUser ? req.session.currentUser : null;
+  // access this value @ {{user}} or {{user.prop}} in .hbs
+  res.locals.isLoggedIn = Boolean(req.session.currentUser);
+  // access this value @ {{isLoggedIn}} in .hbs
+  next(); // continue to the requested route
+}
+app.use(checkloginStatus);
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);

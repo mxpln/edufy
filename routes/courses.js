@@ -32,7 +32,6 @@ router.get("/add", function (req, res, next) {
     .catch(next);
 });
 
-
 router.post("/add", upload.single("image"), (req, res, next) => {
   const {
     title,
@@ -66,38 +65,48 @@ router.post("/add", upload.single("image"), (req, res, next) => {
     });
 });
 
-
-
 router.get("/:id", function (req, res, next) {
-  Category.find().then((dbResCat) => {
-    Course.findById(req.params.id)
-      .populate("category")
-      .then((dbRes) => {
-        res.render("my-course-id", {
-          course: dbRes,
-          category: dbResCat
+  Category.find()
+    .then((dbResCat) => {
+      Course.findById(req.params.id)
+        .populate("category")
+        .then((dbRes) => {
+          res.render("my-course-id", {
+            course: dbRes,
+            category: dbResCat,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      });
-  });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
-
 
 router.get("/:id/edit", function (req, res, next) {
-  Category.find().then((dbResCat) => {
-    Course.findById(req.params.id)
-      .populate("category")
-      .then((dbRes) => {
-        res.render("one-course-edit", {
-          course: dbRes,
-          category: dbResCat
+  Category.find()
+    .then((dbResCat) => {
+      Course.findById(req.params.id)
+        .populate("category")
+        .then((dbRes) => {
+          res.render("one-course-edit", {
+            course: dbRes,
+            category: dbResCat,
+          });
+        })
+        .catch((error) => {
+          console.log(error);
         });
-      });
-  });
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
 
-
 router.post("/:id/edit", upload.single("image"), (req, res, next) => {
-  let editedCourse 
+  let editedCourse;
   if (req.file) {
     const {
       title,
@@ -122,12 +131,12 @@ router.post("/:id/edit", upload.single("image"), (req, res, next) => {
       category,
     };
   } else {
-    editedCourse = req.body
+    editedCourse = req.body;
   }
-  console.log(editedCourse)
+  console.log(editedCourse);
   Course.findByIdAndUpdate(req.params.id, editedCourse, {
-      new: true
-    })
+    new: true,
+  })
     .then((dbRes) => {
       console.log(dbRes);
       res.redirect("/courses/prof");
@@ -137,15 +146,14 @@ router.post("/:id/edit", upload.single("image"), (req, res, next) => {
     });
 });
 
-
 router.post("/:id/delete", (req, res, next) => {
   Course.findByIdAndDelete(req.params.id)
-  .then((dbRes) => {
-    res.redirect("/courses/prof");
-  })
-  .catch((dbErr) => {
-    console.log(dbErr);
-  })
-})
+    .then((dbRes) => {
+      res.redirect("/courses/prof");
+    })
+    .catch((dbErr) => {
+      console.log(dbErr);
+    });
+});
 
 module.exports = router;
