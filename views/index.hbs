@@ -3,8 +3,26 @@
 
 <h1>index</h1>
 
-<p>Chercher un cours</p>
+<p>Chercher par categorie</p>
 
+<form action="/index" method="GET">
+    <div>
+        <label for="category">Category</label>
+        <select name="category" id="category" class="select">
+            <option value="" disabled selected>Choose a category</option>
+            {{#each category}}
+            <option value="{{this._id}}">{{this.category}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <label for="from">From</label>
+    <input type="text" id="from" name="from">
+    <label for="to">to</label>
+    <input type="text" id="to" name="to">
+    <button>Submit</button>
+</form>
+
+{{!-- vignette --}}
 {{#each courses}}
 <div>
     <img src="{{this.image}}" alt="IMG">
@@ -29,7 +47,6 @@
             <p>{{this.name}}</p>
             {{/each}}
         </li>
-
         <li>
             <p>Place :{{this.place}}</p>
         </li>
