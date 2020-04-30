@@ -23,7 +23,7 @@
 </form>
 
 {{!-- vignette --}}
-{{#each courses}}
+{{!-- {{#each courses}}
 <div>
     <img src="{{this.image}}" alt="IMG">
     <ul>
@@ -59,4 +59,24 @@
     </ul>
     <button><a href="/{{this._id}}">Discover this course</a></button>
 </div>
+{{/each}} --}}
+
+
+
+{{#each finalArr}}
+<h1>{{this.date}}</h1>
+{{#each courses}}
+<h3>{{this.title}}</h3>
+<img src="{{this.image}}" alt="IMG" style="width:200px;">
+    
+<div><p>Description: {{this.description}}</p></div>
+<div><p>DATE:{{formatDate this.date }}</p></div>
+<div><p>PRICE: {{this.price}}$</p></div>
+<div><p>CATEGORY: {{this.category.category}}</p></div>
+<div>participants :{{#each participants}}<p>{{this.name}}</p> {{/each}}</div>
+<div><p>Location :{{this.place}}</p></div>
+<div><p>Min people: {{this.minPeople}}</p></div>
+<div><p>Max people : {{this.maxPeople}}</p></div>
+<div><button><a href="/{{this._id}}">Discover this course</a></button></div>
+{{/each}}
 {{/each}}

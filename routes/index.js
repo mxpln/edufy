@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+const moment = require("moment")
 const User = require("../models/User");
 const Course = require("../models/Course");
 const Category = require("../models/Category");
@@ -11,6 +12,7 @@ router.get("/", function (req, res, next) {
 
 //Homepage
 router.get("/index", function (req, res, next) {
+
   let dateSort = {
     date: +1,
   };
@@ -22,8 +24,7 @@ router.get("/index", function (req, res, next) {
   }
   if (req.query.from && req.query.to) {
     filter = {
-      $and: [
-        {
+      $and: [{
           date: {
             $gte: new Date(req.query.from).toISOString(),
           },
@@ -39,8 +40,7 @@ router.get("/index", function (req, res, next) {
   if (req.query.category && req.query.from && req.query.to) {
     // filter.category = req.query.category;
     filter = {
-      $and: [
-        {
+      $and: [{
           date: {
             $gte: new Date(req.query.from).toISOString(),
           },
@@ -59,23 +59,48 @@ router.get("/index", function (req, res, next) {
   Category.find().then((dbResCat) => {
     Course.find(filter)
       .sort(dateSort)
-      .populate({ path: "participants", model: User })
+      .populate({
+        path: "participants",
+        model: User
+      })
       .populate("category")
       .then((dbRes) => {
-        let participants = dbRes[0].participants[0];
-        // let finalArr = []
-        // let arrayDates = dbRes.map(oneCourse => oneCourse.date)
-        // console.log(arrayDates)
-        // arrayDates.forEach(date=> {
-        //   let clusteredCourses =  dbRes.filter(oneCourse => oneCourse.date === date)
-        //   finalArr.push(clusteredCourses)
-        // })
 
-        // console.log("final",finalArr)
+        let today = new Date();
+        console.log("this date : ", today);
+
+        let comingCourses = dbRes.filter((course)=>{
+          return course.date >= today
+        })
+
+        let participants = dbRes[0].participants[0];
+
+        let finalArr = []
+
+        let arrayDates = comingCourses.map(oneCourse => oneCourse.date)
+
+        let stringifiedDates = new Set(arrayDates.map(oneDate => oneDate.toString()))
+        console.log(stringifiedDates)
+
+        stringifiedDates.forEach(date => {
+
+          let clusteredCourses = dbRes.filter(oneCourse => oneCourse.date.toString() === date)
+
+          finalArr.push({
+            date: moment(date).format("dddd DD MMMM YYYY"),
+            courses: clusteredCourses
+          });
+        })
+
+      
+       
+
         res.render("index", {
+          // futureCourses,
           courses: dbRes,
           category: dbResCat,
           participants: participants,
+          finalArr: finalArr
           // participants: dbRes.participants,
         });
       });
@@ -87,7 +112,10 @@ router.get("/:id", function (req, res, next) {
     .then((dbResCat) => {
       Course.findById(req.params.id)
         .populate("category")
-        .populate({ path: "participants", model: User })
+        .populate({
+          path: "participants",
+          model: User
+        })
         .then((dbRes) => {
           const hasCourse = dbRes.participants
             .map((participants) => participants._id)
