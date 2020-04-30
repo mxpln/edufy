@@ -7,6 +7,7 @@ var logger = require("morgan");
 var sassMiddleware = require("node-sass-middleware");
 require("dotenv").config();
 require("./config/mongodb");
+// require("./helpers/hbs");
 const hbs = require("hbs");
 
 const session = require("express-session");
@@ -26,6 +27,13 @@ hbs.registerHelper("formatDateForInput", function (date, compare, options) {
 
 hbs.registerHelper("formatDate", function (date) {
   return moment(date).format("dddd DD MMMM YYYY");
+});
+
+hbs.registerHelper("placesLeft", function (arr, max) {
+  return max - arr.length;
+});
+hbs.registerHelper("priceUpdate", function (par, price) {
+  return Math.floor(price / par.length);
 });
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

@@ -64,6 +64,7 @@ router.get("/index", function (req, res, next) {
         model: User
       })
       .populate("category")
+      .populate({ path: "teacher", model: User })
       .then((dbRes) => {
 
         let today = new Date();
@@ -112,17 +113,14 @@ router.get("/:id", function (req, res, next) {
     .then((dbResCat) => {
       Course.findById(req.params.id)
         .populate("category")
-        .populate({
-          path: "participants",
-          model: User
-        })
+        .populate({ path: "participants", model: User })
+        .populate({ path: "teacher", model: User })
         .then((dbRes) => {
           const hasCourse = dbRes.participants
             .map((participants) => participants._id)
             .includes(req.session.currentUser._id);
 
           let par = dbRes.participants;
-          console.log(par);
           res.render("course-id", {
             course: dbRes,
             category: dbResCat,

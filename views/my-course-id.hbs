@@ -5,12 +5,18 @@
 <img src="{{course.image}}" alt="img" />
 <p>DATE : {{formatDate course.date}}</p>
 <p>PRICE : {{course.price}}</p>
+<p>Price update: {{priceUpdate this.participants course.price}}</p>
 <p>CATEGORY : {{course.category.category}}</p>
-<p>PARTICIPANTS : {{course.participants}}</p>
+<p>PARTICIPANTS : </p>
+
+{{#each participants}}
+<img src="{{this.image}}" alt="">
+{{/each}}
+<p>Teacher: </p><img src="{{course.teacher.image}}" alt="">
 <p>PLACE : {{course.place}}</p>
 <p>MINPEOPLE : {{course.minPeople}}</p>
 <p>MAXPEOPLE : {{course.maxPeople}}</p>
-
+<p>{{placesLeft this.participants course.maxPeople}} places left</p>
 <button><a href="/courses/{{course._id}}/edit">EDIT</a></button>
 
 <form action="/courses/{{course._id}}/delete" method="POST">
