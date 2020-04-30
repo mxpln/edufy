@@ -63,7 +63,7 @@ router.get("/index", function (req, res, next) {
       .populate("category")
       .populate({ path: "teacher", model: User })
       .then((dbRes) => {
-        let participants = dbRes[0].participants[0];
+        // let participants = dbRes[0].participants[0];
         // let finalArr = []
         // let arrayDates = dbRes.map(oneCourse => oneCourse.date)
         // console.log(arrayDates)
@@ -76,7 +76,7 @@ router.get("/index", function (req, res, next) {
         res.render("index", {
           courses: dbRes,
           category: dbResCat,
-          participants: participants,
+          participants: dbRes,
           // teacher: teacher,
           // participants: dbRes.participants,
         });

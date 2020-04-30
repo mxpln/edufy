@@ -1,17 +1,36 @@
-html {
-  font-family: "Roboto Slab", serif;
-}
+@import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab&display=swap");
 
+$purple: #6246ea;
+$black: #2b2c34;
+$sec: #d1d1e9;
+$ter: #e45858;
+$font: "Roboto", sans-serif;
+$font-slab: "Roboto Slab", serif;
+$white: #fffffe;
+* {
+  margin: 0;
+  padding: 0;
+  border: 1px fuchsia solid;
+}
+html {
+  font-family: $font;
+  color: $black;
+}
+body {
+  color: $black;
+}
 #logo {
   height: 5vh;
   margin-left: 75px;
 }
 
 nav {
+  font-family: $font-slab;
   color: #6246ea;
   font-size: 24px;
   display: flex;
   flex-direction: row;
+
   align-items: center;
 }
 
@@ -79,7 +98,11 @@ nav li a {
   transition: 0.3s;
 }
 .form-input {
+  &:focus {
+    border-color: $purple;
+  }
   color: #282828;
+  font-family: $font;
   display: block;
   width: 100%;
   padding-left: 12px;
@@ -92,4 +115,128 @@ nav li a {
   border: 3px solid #000;
   border-radius: 5px;
   height: 50px;
+  margin-bottom: 30px;
+}
+.form-sign-up {
+  //   text-align: center;
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.sign-up-btn {
+  &:focus {
+    transform: translateY(-2px);
+  }
+
+  transition: transform 0.2s;
+  transform: translateZ(0);
+  box-sizing: border-box;
+  height: 48px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: $purple;
+  border-color: $purple;
+  color: $white;
+  cursor: pointer;
+  width: 100%;
+}
+.pic-select {
+  margin-bottom: 20px;
+  label {
+    padding: 5px;
+    margin-left: 2px;
+    margin-bottom: 20px;
+  }
+  input {
+    border: 0;
+    background-color: red;
+  }
+}
+.title-page {
+  text-align: center;
+}
+.inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.inputfile-1 + label {
+  color: $white;
+  background-color: $black;
+}
+
+.inputfile-1:focus + label,
+.inputfile-1.has-focus + label,
+.inputfile-1 + label:hover {
+  background-color: $purple;
+}
+
+.js .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputfile + label {
+  max-width: 80%;
+  font-size: 1.25rem;
+  /* 20px */
+  //   font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.625rem 1.25rem;
+  margin-bottom: 20px;
+  /* 10px 20px */
+}
+
+.no-js .inputfile + label {
+  display: none;
+}
+
+.inputfile:focus + label,
+.inputfile.has-focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputfile + label svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  fill: currentColor;
+  margin-top: -0.25em;
+  /* 4px */
+  margin-right: 0.25em;
+  /* 4px */
+}
+.sign-up--ctn {
+  padding: 50px;
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+}
+.input-el {
+  width: 100%;
+}
+.error-message {
+  text-align: center;
+  color: red;
 }
