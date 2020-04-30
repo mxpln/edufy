@@ -125,7 +125,7 @@ nav li a {
   align-items: center;
   justify-content: center;
 }
-.sign-up-btn {
+.base-btn {
   &:focus {
     transform: translateY(-2px);
   }
@@ -331,5 +331,60 @@ main {
 .title-tag {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+.no-account {
+  margin-top: 20px;
+}
+.create-course--ctn {
+  width: 55%;
+  margin: 20px auto;
+}
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #5c6664;
+  background-image: none;
+  flex: 1;
+  padding: 0 0.5em;
+  color: $white;
+  cursor: pointer;
+  font-size: 1em;
+  font-family: $font;
+}
+select::-ms-expand {
+  display: none;
+}
+.select {
+  position: relative;
+  display: flex;
+  width: 230px;
+  height: 3em;
+  line-height: 3;
+  background: $black;
+  overflow: hidden;
+  border-radius: 0.25em;
+}
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: $purple;
+  cursor: pointer;
+  pointer-events: none;
+  transition: 0.25s all ease;
+}
+.select:hover::after {
+  color: $sec;
+}
+.form-top {
+  display: flex;
   justify-content: space-between;
 }

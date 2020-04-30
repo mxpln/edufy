@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab&display=swap");
 * {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  border: 1px solid fuchsia; }
 
 html {
   font-family: "Roboto", sans-serif;
@@ -105,7 +106,7 @@ nav li a {
   align-items: center;
   justify-content: center; }
 
-.sign-up-btn {
+.base-btn {
   transition: transform 0.2s;
   transform: translateZ(0);
   box-sizing: border-box;
@@ -122,7 +123,7 @@ nav li a {
   color: #fffffe;
   cursor: pointer;
   width: 100%; }
-  .sign-up-btn:focus {
+  .base-btn:focus {
     transform: translateY(-2px); }
 
 .pic-select {
@@ -296,6 +297,61 @@ main {
 .title-tag {
   display: flex;
   align-items: center;
+  justify-content: space-between; }
+
+.no-account {
+  margin-top: 20px; }
+
+.create-course--ctn {
+  width: 55%;
+  margin: 20px auto; }
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  outline: 0;
+  box-shadow: none;
+  border: 0 !important;
+  background: #5c6664;
+  background-image: none;
+  flex: 1;
+  padding: 0 0.5em;
+  color: #fffffe;
+  cursor: pointer;
+  font-size: 1em;
+  font-family: "Roboto", sans-serif; }
+
+select::-ms-expand {
+  display: none; }
+
+.select {
+  position: relative;
+  display: flex;
+  width: 230px;
+  height: 3em;
+  line-height: 3;
+  background: #2b2c34;
+  overflow: hidden;
+  border-radius: 0.25em; }
+
+.select::after {
+  content: "\25BC";
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0 1em;
+  background: #6246ea;
+  cursor: pointer;
+  pointer-events: none;
+  transition: 0.25s all ease; }
+
+.select:hover::after {
+  color: #d1d1e9; }
+
+.form-top {
+  display: flex;
   justify-content: space-between; }
 
 /*# sourceMappingURL=style.css.map */
