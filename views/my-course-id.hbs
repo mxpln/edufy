@@ -3,7 +3,7 @@
 <h2>TITLE : {{course.title}}</h2>
 <p>DESCRIPTION :{{course.description}}</p>
 <img src="{{course.image}}" alt="img" />
-<p>DATE : {{course.date}}</p>
+<p>DATE : {{formatDate course.date}}</p>
 <p>PRICE : {{course.price}}</p>
 <p>Price update: {{priceUpdate this.participants course.price}}</p>
 <p>CATEGORY : {{course.category.category}}</p>

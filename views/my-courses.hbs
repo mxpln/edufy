@@ -1,4 +1,6 @@
 <h1>My courses</h1>
+
+<h1>My courses</h1>
 {{#each courses}}
 <img src="{{this.image}}" alt="img" />
 <ul>
@@ -24,3 +26,75 @@
 <h3><a href="/{{this._id}}">voir ce cours</a></h3>
 
 {{/each}}
+<div>
+
+    {{!-- <section class="future-courses">
+        <h3>Future Courses</h3>
+        {{#each futureCourses}}
+        <ul>
+
+            <li>{{this.description}}</li>
+            <li>{{this.price}}</li>
+            <li>Price update: {{priceUpdate this.participants this.price}}</li>
+            <li>{{formatDate this.date}}</li>
+            <li>{{this.minPeople}}</li>
+            <li>{{this.maxPeople}}</li>
+            <li>{{this.place}}</li>
+            <li>Teacher: <img src="{{this.teacher.image}}" alt=""></li>
+            {{#each participants}}
+            <li>Participants: <img src="{{this.participants.image}}" alt=""></li>
+            {{/each}}
+            <li>{{this.category.category}}</li>
+            <p>{{placesLeft this.participants this.maxPeople}} places left</p>
+            <h3><a href="/{{this._id}}">voir ce cours</a></h3>
+        </ul>
+        {{/each}}
+    </section>
+</div>
+<section class="past-courses">
+    <h3>Past Courses</h3>
+    {{#each pastCourses}}
+    {{this.title}}
+    {{this.description}}
+    {{this.price}}
+    {{formatDate this.date}}
+    {{#each participants}}
+    <li>Participants: <img src="{{this.participants.image}}" alt=""></li>
+    {{/each}}
+    {{this.minPeople}}
+    {{this.maxPeople}}
+    {{this.place}}
+    <img src="{{this.image}}" alt="img" />
+    {{this.category.category}}
+    <h3><a href="/{{this._id}}">voir ce cours</a></h3>
+    {{/each}}
+
+</section> --}}
+
+    {{!-- <form action="edit/{{this._id}}" method="GET">
+<button> Edit this course</button>
+</form> --}}
+    {{!-- <a href="/{{this._id}}">voir ce cours</a>
+{{#each courses}}
+<img src="{{this.image}}" alt="img" />
+<ul>
+    <li>{{this.title}}</li>
+    <li>{{this.description}}</li>
+    <li>{{this.price}}</li>
+    <li>Price update: {{priceUpdate this.participants this.price}}</li>
+    <li>{{this.date}}</li>
+    <li>{{this.minPeople}}</li>
+    <li>{{this.maxPeople}}</li>
+    <li>{{this.place}}</li>
+    <li>Teacher: <img src="{{this.teacher.image}}" alt=""></li>
+    {{#each participants}}
+    <li>Participants: <img src="{{this.image}}" alt=""></li>
+    {{/each}}
+    <li>{{this.category.category}}</li>
+    <p>{{placesLeft this.participants this.maxPeople}} places left</p>
+</ul>
+{{!-- <form action="edit/{{this._id}}" method="GET">
+<button> Edit this course</button>
+</form> --}}
+
+    {{!-- {{/each}} --}}

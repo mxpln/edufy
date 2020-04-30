@@ -1,8 +1,5 @@
 <h1>{{title}}</h1>
-<p>Welcome to THE PAGE WITH EVERY COURSES !!!</p>
-
-<h1>index</h1>
-
+<h1>Index</h1>
 <p>Chercher par categorie</p>
 
 <form action="/index" method="GET">
@@ -22,46 +19,50 @@
     <button>Submit</button>
 </form>
 
+{{#each finalArr}}
+<h2>{{this.date}}</h2>
 {{!-- vignette --}}
-{{#each courses}}
-<div>
-    <img src="{{this.image}}" alt="IMG">
-    <ul>
-        <li>
-            <h3>Title: {{this.title}}</h3>
-        </li>
-        <li>
-            <p>Description: {{this.description}}</p>
-        </li>
-        <li>
-            <p>DATE: {{this.date}}</p>
-        </li>
-        <li>
-            <p>PRICE: {{this.price}}$</p>
-        </li>
-        <li>Price update: {{priceUpdate this.participants this.price}}</li>
-        <li>
-            <p>CATEGORY: {{this.category.category}}</p>
-        </li>
-        <li>
-            Participants: {{#each participants}}
-            <img src="{{this.image}}" />
-            {{/each}}
-        </li>
-        <li>
-            <p>Teacher: <img src="{{this.teacher.image}}" /></p>
-        </li>
-        <li>
-            <p>Place :{{this.place}}</p>
-        </li>
-        <li>
-            <p>Min people: {{this.minPeople}}</p>
-        </li>
-        <li>
-            <p>Max people : {{this.maxPeople}}</p>
-        </li>
-        <li>{{placesLeft this.participants this.maxPeople}} places left</li>
-    </ul>
-    <button><a href="/{{this._id}}">Discover this course</a></button>
+<div class="global-vignette-container">
+    {{#each courses}}
+    <div class="vignette-container">
+        <div class="vignette-container-inside">
+            <article class="teacher-vignette">
+                <a id="vignette-link" href="/{{this._id}}">
+                    <img class="vignette-main-image" src="{{this.image}}" alt="IMG">
+                    <div id="contain" class="cercle"><img class="cercle teacher-image" src="{{this.teacher.image}}" />
+                        <h4>{{this.teacher.name}} </h4>
+                        <h4>{{this.teacher.lastname}}</h4>
+                    </div>
+            </article>
+            <div class="vignette-inside">
+                <div class="title-tag">
+                    <div>
+                        <h2>{{this.title}}</h2>
+                    </div>
+                    <div>
+                        <p class="tag">{{this.category.category}}</p>
+                    </div>
+                </div>
+                <p class="overflow-ellipsis vignette-description">{{this.description}}</p>
+                {{!-- <p>DATE: {{this.date}}</p> --}}
+                <div class="vignette-bottom">
+                    <div class="vignette-bottom-left">
+                        {{#each participants}}
+                        <img class="cercle" src="{{this.image}}" />
+                        {{/each}}
+                    </div>
+                    <div class="vignette-bottom-right">
+                        <h2>{{priceUpdate this.participants this.price}}$ / pers </h2>
+                        <p>{{placesLeft this.participants this.maxPeople}} places left</p>
+                    </div>
+                </div>
+                {{!-- <button><a href="/{{this._id}}">Discover this course</a></button> --}}
+            </div>
+        </div>
+
+    </div>
+    </a>
+    {{/each}}
 </div>
+
 {{/each}}

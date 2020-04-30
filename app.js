@@ -2,6 +2,7 @@ var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
+const moment = require("moment")
 var logger = require("morgan");
 var sassMiddleware = require("node-sass-middleware");
 require("dotenv").config();
@@ -20,8 +21,12 @@ const MongoStore = require("connect-mongo")(session);
 var app = express();
 hbs.registerHelper("formatDateForInput", function (date, compare, options) {
   if (compare === "current")
-    return new Date(date).toISOString().substring(0, 16);
-  if (compare === "min") return new Date().toISOString().substring(0, 16);
+    return moment(date).format("YYYY-DD-MMTkk:mm")
+  if (compare === "min") return moment().format("YYYY-DD-MMTkk:mm");
+});
+
+hbs.registerHelper("formatDate", function (date) {
+  return moment(date).format("dddd DD MMMM YYYY");
 });
 
 hbs.registerHelper("placesLeft", function (arr, max) {
@@ -65,6 +70,7 @@ app.use(
     resave: true,
   })
 );
+
 function checkloginStatus(req, res, next) {
   res.locals.user = req.session.currentUser ? req.session.currentUser : null;
   // access this value @ {{user}} or {{user.prop}} in .hbs

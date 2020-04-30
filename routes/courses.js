@@ -4,15 +4,39 @@ const Category = require("../models/Category.js");
 const User = require("../models/User");
 const Course = require("../models/Course.js");
 const upload = require("../config/cloudinary");
+
 router.get("/student", (req, res) => {
-  // User.findById(req.session.currentUser._id)
-  //   .populate("courses")
-  //   .then((dbResUser) => {
   Course.find({ participants: { $eq: req.session.currentUser._id } })
     .populate("category")
-    .populate("participants")
-    .populate("teacher")
+    .populate({ path: "participants", model: User })
+    .populate({ path: "teacher", model: User })
     .then((dbRes) => {
+      // User.findById(req.session.currentUser._id)
+      //   .populate("courses")
+      //   .then((dbResUser) => {
+      //     let dateSort = {
+      //       date: +1,
+      //     };
+      //     let today = new Date();
+      //     let pastCourses = dbResUser.courses.filter((course) => {
+      //       return course.date <= today;
+      //     });
+      //     function compare(a, b) {
+      //       if (a.date <= b.date) {
+      //         return -1;
+      //       }
+      //       if (a.date >= b.date) {
+      //         return 1;
+      //       }
+      //       // a must be equal to b
+      //       return 0;
+      //     }
+      //     pastCourses.sort(compare);
+      //     let futureCourses = dbResUser.courses.filter((course) => {
+      //       return course.date >= today;
+      //     });
+      //     futureCourses.sort(compare);
+      //     console.log();
       res.render("my-courses", {
         courses: dbRes,
       });
@@ -21,11 +45,7 @@ router.get("/student", (req, res) => {
       console.log(dbErr);
     });
 });
-//     .catch((dbError) => {
-//       console.log(dbError);
-//     });
-// });
-//get prof courses (dashboard)
+
 router.get("/prof", function (req, res, next) {
   Category.find()
     .then((dbResCat) => {
@@ -189,11 +209,15 @@ router.post("/:id/delete", (req, res, next) => {
 });
 router.post("/:id/add", (req, res) => {
   Course.findByIdAndUpdate(req.params.id, {
-    $addToSet: { participants: req.session.currentUser._id },
+    $addToSet: {
+      participants: req.session.currentUser._id,
+    },
   })
     .then((dbRes) => {
       User.findByIdAndUpdate(req.session.currentUser._id, {
-        $addToSet: { courses: req.params.id },
+        $addToSet: {
+          courses: req.params.id,
+        },
       })
         .then((dbResUser) => {
           req.session.currentUser = dbResUser;
@@ -210,11 +234,15 @@ router.post("/:id/add", (req, res) => {
 
 router.post("/:id/remove", (req, res) => {
   Course.findByIdAndUpdate(req.params.id, {
-    $pull: { participants: req.session.currentUser._id },
+    $pull: {
+      participants: req.session.currentUser._id,
+    },
   })
     .then((dbRes) => {
       User.findByIdAndUpdate(req.session.currentUser._id, {
-        $pull: { courses: req.params.id },
+        $pull: {
+          courses: req.params.id,
+        },
       })
         .then((dbResUser) => {
           req.session.currentUser = dbResUser;

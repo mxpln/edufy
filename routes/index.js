@@ -1,5 +1,6 @@
 var express = require("express");
 var router = express.Router();
+const moment = require("moment");
 const User = require("../models/User");
 const Course = require("../models/Course");
 const Category = require("../models/Category");
@@ -59,25 +60,47 @@ router.get("/index", function (req, res, next) {
   Category.find().then((dbResCat) => {
     Course.find(filter)
       .sort(dateSort)
-      .populate({ path: "participants", model: User })
+      .populate({
+        path: "participants",
+        model: User,
+      })
       .populate("category")
       .populate({ path: "teacher", model: User })
       .then((dbRes) => {
-        // let participants = dbRes[0].participants[0];
-        // let finalArr = []
-        // let arrayDates = dbRes.map(oneCourse => oneCourse.date)
-        // console.log(arrayDates)
-        // arrayDates.forEach(date=> {
-        //   let clusteredCourses =  dbRes.filter(oneCourse => oneCourse.date === date)
-        //   finalArr.push(clusteredCourses)
-        // })
-        console.log(dbRes);
-        // console.log(dbRes);
+        let today = new Date();
+        console.log("this date : ", today);
+
+        let comingCourses = dbRes.filter((course) => {
+          return course.date >= today;
+        });
+
+        let finalArr = [];
+
+        let arrayDates = comingCourses.map((oneCourse) => oneCourse.date);
+
+        let stringifiedDates = new Set(
+          arrayDates.map((oneDate) => oneDate.toString())
+        );
+        console.log(stringifiedDates);
+
+        stringifiedDates.forEach((date) => {
+          let clusteredCourses = dbRes.filter(
+            (oneCourse) => oneCourse.date.toString() === date
+          );
+
+          finalArr.push({
+            date: moment(date).format("dddd DD MMMM YYYY"),
+            courses: clusteredCourses,
+          });
+        });
+
         res.render("index", {
+          // futureCourses,
           courses: dbRes,
           category: dbResCat,
           participants: dbRes,
           // teacher: teacher,
+          finalArr: finalArr,
           // participants: dbRes.participants,
         });
       });

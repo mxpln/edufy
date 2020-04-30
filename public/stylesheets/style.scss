@@ -10,7 +10,6 @@ $white: #fffffe;
 * {
   margin: 0;
   padding: 0;
-  border: 1px fuchsia solid;
 }
 html {
   font-family: $font;
@@ -239,4 +238,98 @@ nav li a {
 .error-message {
   text-align: center;
   color: red;
+}
+// MAIN PADDING
+main {
+  padding: 50px 10%;
+}
+// VIGNETTES COURSES
+.vignette-container {
+  width: 25%;
+  height: 25%;
+  margin: 20px 20px 0 0;
+}
+.global-vignette-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.vignette-container-inside {
+  border-radius: 6px;
+  box-shadow: 0 2px 14px rgba(126, 87, 88, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+.vignette-main-image {
+  border-radius: 6px 6px 0 0;
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+  filter: grayscale(60%);
+}
+#vignette-link {
+  text-decoration: none;
+}
+.cercle {
+  width: 50px;
+  height: 50px;
+  border-radius: 60px;
+}
+.teacher-image {
+  width: 100%;
+  object-fit: cover;
+}
+#contain {
+  display: flex;
+  padding: 10px 30px;
+}
+#contain h4 {
+  margin-left: 10px;
+  margin-top: 15px;
+  color: white;
+}
+.vignette-inside {
+  padding: 20px 30px;
+  line-height: 20px;
+}
+// boxshadow
+.box-shad {
+  box-shadow: 0 2px 14px rgba(126, 87, 88, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+}
+.vignette-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.vignette-bottom-right {
+  align-items: center;
+  text-align: right;
+  line-height: 25px;
+}
+.tag {
+  padding: 5px;
+  background-color: #d1d1e9;
+  border-radius: 6px;
+  display: inline-flex;
+  font-size: 12px;
+  color: #6246ea;
+}
+.vignette-bottom-right p {
+  color: #d1d1e9;
+  font-size: 15px;
+}
+.vignette-bottom-right h2 {
+  color: #6246ea;
+}
+.vignette-description {
+  margin: 10px 0 15px 0;
+  color: #d1d1e9;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.overflow-ellipsis {
+  text-overflow: ellipsis;
+}
+.title-tag {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
