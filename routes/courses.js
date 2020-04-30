@@ -4,32 +4,48 @@ const Category = require("../models/Category.js");
 const User = require("../models/User");
 const Course = require("../models/Course.js");
 const upload = require("../config/cloudinary");
-
 router.get("/student", (req, res) => {
-  User.findById(req.session.currentUser._id)
-    .populate("courses")
-    .then((dbResUser) => {
-      res.render("my-courses", { user: dbResUser, courses: dbResUser.courses });
+  // User.findById(req.session.currentUser._id)
+  //   .populate("courses")
+  //   .then((dbResUser) => {
+  Course.find({ participants: { $eq: req.session.currentUser._id } })
+    .populate("category")
+    .populate("participants")
+    .populate("teacher")
+    .then((dbRes) => {
+      res.render("my-courses", {
+        courses: dbRes,
+      });
     })
-    .catch((dbError) => {
-      console.log(dbError);
+    .catch((dbErr) => {
+      console.log(dbErr);
     });
 });
+//     .catch((dbError) => {
+//       console.log(dbError);
+//     });
+// });
 //get prof courses (dashboard)
 router.get("/prof", function (req, res, next) {
-  Category.find().then((dbResCat) => {
-    Course.find({})
-      .populate("category")
-      .then((dbRes) => {
-        res.render("prof-courses", {
-          courses: dbRes,
-          category: dbResCat,
+  Category.find()
+    .then((dbResCat) => {
+      Course.find({ teacher: { $eq: req.session.currentUser._id } })
+        .populate({ path: "teacher", model: User })
+        .populate("category")
+        .populate("participants")
+        .then((dbRes) => {
+          res.render("prof-courses", {
+            courses: dbRes,
+            category: dbResCat,
+          });
+        })
+        .catch((err) => {
+          console.log(err);
         });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 });
 
 /* GET Course form. -> get localhost:3000/courses/add*/
@@ -55,6 +71,7 @@ router.post("/add", upload.single("image"), (req, res, next) => {
     category,
   } = req.body;
   const image = req.file.url;
+  const teacher = req.session.currentUser._id;
   const newCourse = new Course({
     title,
     description,
@@ -65,6 +82,7 @@ router.post("/add", upload.single("image"), (req, res, next) => {
     place,
     image,
     category,
+    teacher,
   });
   newCourse
     .save()
@@ -81,10 +99,14 @@ router.get("/:id", function (req, res, next) {
     .then((dbResCat) => {
       Course.findById(req.params.id)
         .populate("category")
+        .populate("participants")
+        .populate("teacher")
         .then((dbRes) => {
+          console.log();
           res.render("my-course-id", {
             course: dbRes,
             category: dbResCat,
+            participants: dbRes.participants,
           });
         })
         .catch((error) => {
@@ -144,12 +166,11 @@ router.post("/:id/edit", upload.single("image"), (req, res, next) => {
   } else {
     editedCourse = req.body;
   }
-  console.log(editedCourse);
+
   Course.findByIdAndUpdate(req.params.id, editedCourse, {
     new: true,
   })
     .then((dbRes) => {
-      console.log(dbRes);
       res.redirect("/courses/prof");
     })
     .catch((dbErr) => {

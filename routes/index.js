@@ -61,6 +61,7 @@ router.get("/index", function (req, res, next) {
       .sort(dateSort)
       .populate({ path: "participants", model: User })
       .populate("category")
+      .populate({ path: "teacher", model: User })
       .then((dbRes) => {
         let participants = dbRes[0].participants[0];
         // let finalArr = []
@@ -70,12 +71,13 @@ router.get("/index", function (req, res, next) {
         //   let clusteredCourses =  dbRes.filter(oneCourse => oneCourse.date === date)
         //   finalArr.push(clusteredCourses)
         // })
-
-        // console.log("final",finalArr)
+        console.log(dbRes);
+        // console.log(dbRes);
         res.render("index", {
           courses: dbRes,
           category: dbResCat,
           participants: participants,
+          // teacher: teacher,
           // participants: dbRes.participants,
         });
       });
@@ -88,13 +90,13 @@ router.get("/:id", function (req, res, next) {
       Course.findById(req.params.id)
         .populate("category")
         .populate({ path: "participants", model: User })
+        .populate({ path: "teacher", model: User })
         .then((dbRes) => {
           const hasCourse = dbRes.participants
             .map((participants) => participants._id)
             .includes(req.session.currentUser._id);
 
           let par = dbRes.participants;
-          console.log(par);
           res.render("course-id", {
             course: dbRes,
             category: dbResCat,

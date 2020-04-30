@@ -39,13 +39,17 @@
         <li>
             <p>PRICE: {{this.price}}$</p>
         </li>
+        <li>Price update: {{priceUpdate this.participants this.price}}</li>
         <li>
             <p>CATEGORY: {{this.category.category}}</p>
         </li>
         <li>
-            {{#each participants}}
-            <p>{{this.name}}</p>
+            Participants: {{#each participants}}
+            <img src="{{this.image}}" />
             {{/each}}
+        </li>
+        <li>
+            <p>Teacher: <img src="{{this.teacher.image}}" /></p>
         </li>
         <li>
             <p>Place :{{this.place}}</p>
@@ -56,6 +60,7 @@
         <li>
             <p>Max people : {{this.maxPeople}}</p>
         </li>
+        <li>{{placesLeft this.participants this.maxPeople}} places left</li>
     </ul>
     <button><a href="/{{this._id}}">Discover this course</a></button>
 </div>

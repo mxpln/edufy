@@ -1,14 +1,23 @@
 <h1>Courses prof dashboard</h1>
 
 <a href="/courses/add">Create a new course</a>
-
+{{!-- {{#if teacher}}
+<p>Hello</p>
+{{/if}} --}}
 {{#each courses}}
+
 <h3>{{this.title}}</h3>
 <h3>{{this.description}}</h3>
 <h3>{{this.price}}</h3>
+<h3>Price update: {{priceUpdate this.participants this.price}}</h3>
 <h3>{{this.date}}</h3>
 <h3>{{this.minPeople}}</h3>
 <h3>{{this.maxPeople}}</h3>
+{{#each participants}}
+<img src="{{this.image}}" alt="">
+{{/each}}
+<p>{{placesLeft this.participants this.maxPeople}} places left</p>
+Teacher:<img src="{{this.teacher.image}}" />
 <h3>{{this.place}}</h3>
 <img src="{{this.image}}" alt="img" />
 <h3>{{this.category.category}}</h3>
@@ -17,6 +26,5 @@
 <button> Edit this course</button>
 </form> --}}
 <a href="/courses/{{this._id}}">voir ce cours</a>
-
 
 {{/each}}

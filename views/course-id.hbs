@@ -16,13 +16,19 @@
             <p>PRICE: {{course.price}}$</p>
         </li>
         <li>
+            <p>Price update: {{priceUpdate this.participants course.price}}</p>
+        </li>
+        <li>
             <p>CATEGORY: {{course.category.category}}</p>
         </li>
         {{#each participants}}
         <li>
-            <p>Participants :{{this.name}}</p>
+            Participants <img src="{{this.image}}" alt="">
         </li>
         {{/each}}
+        <li>
+            Teacher: <img src="{{course.teacher.image}}" alt="">
+        </li>
         <li>
             <p>Place :{{course.place}}</p>
         </li>
@@ -32,6 +38,10 @@
         <li>
             <p>Max people : {{course.maxPeople}}</p>
         </li>
+        <li>
+            <p>{{placesLeft this.participants course.maxPeople}} places left</p>
+        </li>
+
     </ul>
     {{#if hasCourse}}
     <form action="/courses/{{course._id}}/remove" method="POST">
