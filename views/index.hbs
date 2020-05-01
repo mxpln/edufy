@@ -1,25 +1,27 @@
 <h1 class="h1-vlad">What will you learn today ?</h1>
-<form action="/index" method="GET">
-    <div>
-        <label for="category">Category</label>
-        <select name="category" id="category" class="select">
-            <option value="" disabled selected>Choose a category</option>
-            {{#each category}}
-            <option value="{{this._id}}">{{this.category}}</option>
-            {{/each}}
-        </select>
-    </div>
-    <label for="from">From</label>
-    <input type="text" id="from" name="from">
-    <label for="to">to</label>
-    <input type="text" id="to" name="to">
-    <button>Submit</button>
+<div>
+    <form action="/index" method="GET" id="mathSearch">
+        <div>
+            {{!-- <label for="category">Category</label> --}}
+            <select name="category" id="category" class="select">
+                <option value="" disabled selected>Choose a category ↓</option>
+                {{#each category}}
+                <option value="{{this._id}}">{{this.category}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <label for="from"></label>
+        <input type="text" id="from" name="from" class="mathFrom" placeholder="from">
+        <label for="to"></label>
+        <input type="text" id="to" name="to" class="mathTo" placeholder="to">
+</div>
+<button id="mathSearch-button">Search</button>
 </form>
 {{#each finalArr}}
 <h2 class="h2-date-vlad">{{this.date}}</h2>
 {{!-- vignette --}}
 <div class="global-vignette-container">
-    {{#each courses}}
+    {{#each this.courses}}
     <div class="vignette-container">
         <div class="vignette-container-inside">
             <article class="teacher-vignette">

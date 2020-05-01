@@ -20,8 +20,8 @@ const MongoStore = require("connect-mongo")(session);
 
 var app = express();
 hbs.registerHelper("formatDateForInput", function (date, compare, options) {
-  if (compare === "current") return moment(date).format("YYYY-DD-MMTkk:mm");
-  if (compare === "min") return moment().format("YYYY-DD-MMTkk:mm");
+  if (compare === "current") return moment(date).format("YYYY-MM-DDTkk:mm");
+  if (compare === "min") return moment().format("YYYY-MM-DDTkk:mm");
 });
 
 hbs.registerHelper("formatDate", function (date) {
@@ -35,7 +35,7 @@ hbs.registerHelper("priceUpdate", function (par, price) {
   return Math.floor(price / par.length);
 });
 hbs.registerHelper("formatHour", function (date) {
-  return moment(date).format("h:mm");
+  return moment(date).format("kk:mm");
 });
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

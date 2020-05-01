@@ -1,29 +1,72 @@
-<h1>Profile edit</h1>
+<h1 class="my-profile-h1-edit">Profile edit</h1>
 
-<form action="/users/profile/edit/{{user._id}}" method="post" id="profile-edit" enctype="multipart/form-data">
-    <div>
-        <label for="image">Image</label>
-        <input type="file" name="image">
+<form class="form-profile-edit" action="/users/profile/edit/{{user._id}}" method="post" id="profile-edit"
+    enctype="multipart/form-data">
+
+    <div class="form-profile-el">
+        <div class="profile-edit-box">
+            <input type="file" name="image" id="file-edit" class="inputfile inputfile-1"
+                data-multiple-caption="{count} files selected" multiple />
+            <label for="file-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+                    <path
+                        d="M10 0l-5.2 4.9h3.3v5.1h3.8v-5.1h3.3l-5.2-4.9zm9.3 11.5l-3.2-2.1h-2l3.4 2.6h-3.5c-.1 0-.2.1-.2.1l-.8 2.3h-6l-.8-2.2c-.1-.1-.1-.2-.2-.2h-3.6l3.4-2.6h-2l-3.2 2.1c-.4.3-.7 1-.6 1.5l.6 3.1c.1.5.7.9 1.2.9h16.3c.6 0 1.1-.4 1.3-.9l.6-3.1c.1-.5-.2-1.2-.7-1.5z" />
+                </svg> <span>Choose a picture&hellip;</span></label>
+        </div>
+
+        <div class="profile-form-input">
+            <div>
+                {{!-- <label for="name">Name:</label> --}}
+                <input class="form-input" type="text" name="name" value="{{user.name}}">
+            </div>
+            <div>
+                {{!-- <label for="lastname">Lastname:</label> --}}
+                <input class="form-input" type="text" name="lastname" value="{{user.lastname}}">
+            </div>
+            <div>
+                {{!-- <label for="username">Username:</label> --}}
+                <input class="form-input" type="text" name="username" value="{{user.username}}">
+            </div>
+            <div>
+                {{!-- <label for="email">Email:</label> --}}
+                <input class="form-input" type="email" name="email" value="{{user.email}}">
+            </div>
+
+            <button class="edit-form-btn" type="submit" form="profile-edit" value="Submit">Submit</button>
+        </div>
     </div>
-    <div>
-        <label for="name">Name:</label>
-        <input type="text" name="name" value="{{user.name}}">
-    </div>
-    <div>
-        <label for="lastname">Lastname:</label>
-        <input type="text" name="lastname" value="{{user.lastname}}">
-    </div>
-    <div>
-        <label for="username">Username:</label>
-        <input type="text" name="username" value="{{user.username}}">
-    </div>
-    <div>
-        <label for="email">Email:</label>
-        <input type="email" name="email" value="{{user.email}}">
-    </div>
-    {{!-- <div>
-        <label for="password">Password:</label>
-        <input type="password" name="password" value="{{user.password}}">
-    </div> --}}
-    <button type="submit" form="profile-edit" value="Submit">Submit</button>
+    <container class="profile-form">
+
 </form>
+{{!--
+    <div class="profile-form-inputs">
+        <style type="text/css">
+        div {
+            display: table-cell;
+            vertical-align: middle;
+        }
+        </style>
+        <div class="profile-user-pic">
+                {{#if user.image }}
+                    <img src="{{user.image}}" alt="" class:"profile-user-pic-size">
+                {{/if}}
+        </div>
+        <div class="profile-input">
+            <input class="profile-input-txt" type="text" name="name" value="{{user.name}}">
+        </div>
+        <div class="profile-input">
+            <input class="profile-input-txt" type="text" name="lastname" value="{{user.lastname}}">
+        </div>
+        <div class="profile-input">
+            <input class="profile-input-txt" type="text" name="username" value="{{user.username}}">
+        </div>
+        <div class="profile-input">
+            <input class="profile-input-txt" type="email" name="email" value="{{user.email}}">
+        </div>
+            <button class="edit-form-btn" type="submit" form="profile-edit" value="Submit" href="/users/profile/edit">Submit</button>
+    </div>
+            <div>
+            <label for="image">Image</label>
+            <input class="form-input-img" type="file" name="image">
+        </div>
+
+</container> --}}

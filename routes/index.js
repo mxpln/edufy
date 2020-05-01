@@ -68,26 +68,20 @@ router.get("/index", function (req, res, next) {
       .populate({ path: "teacher", model: User })
       .then((dbRes) => {
         let today = new Date();
-        console.log("this date : ", today);
 
         let comingCourses = dbRes.filter((course) => {
           return course.date >= today;
         });
-
         let finalArr = [];
-
         let arrayDates = comingCourses.map((oneCourse) => oneCourse.date);
-
         let stringifiedDates = new Set(
           arrayDates.map((oneDate) => oneDate.toString())
         );
-        console.log(stringifiedDates);
 
         stringifiedDates.forEach((date) => {
           let clusteredCourses = dbRes.filter(
             (oneCourse) => oneCourse.date.toString() === date
           );
-
           finalArr.push({
             date: moment(date).format("dddd DD MMMM YYYY"),
             courses: clusteredCourses,

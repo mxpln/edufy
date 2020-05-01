@@ -1,11 +1,28 @@
-<h1>Profile</h1>
-{{#if user.image }}
-<img src="{{user.image}}" alt="">
-{{/if}}
+<h1 class="my-profile-h1">My Profile</h1>
 
-<div>{{user.name}}</div>
-<div>{{user.lastname}}</div>
-<div>{{user.username}}</div>
-<div>{{user.email}}</div>
-
-<a href="/users/profile/edit">Edit my profile</a>
+<div class="profile-form-inputs">
+    <style type="text/css">
+        div {
+            display: table-cell;
+            vertical-align: middle;
+        }
+    </style>
+    <div class="profile-user-pic">
+        {{#if user.image }}
+        <img src="{{user.image}}" alt="" class:"profile-user-pic-size">
+        {{/if}}
+    </div>
+    <div class="profile-input">
+        <p class="profile-input-txt">{{user.name}}</p>
+    </div>
+    <div class="profile-input">
+        <p class="profile-input-txt">{{user.lastname}}</p>
+    </div>
+    <div class="profile-input">
+        <p class="profile-input-txt">{{user.username}}</p>
+    </div>
+    <div class="profile-input">
+        <p class="profile-input-txt">{{user.email}}</p>
+    </div>
+    <a href="/users/profile/edit" class="sign-up-btn" id="profile-btn-edit">Edit my profile</a>
+</div>

@@ -83,9 +83,8 @@ nav li a {
 .right-button {
   background-color: #6246ea;
   border-radius: 6px;
-  padding: 10px;
-  padding-right: 80px;
-  padding-left: 80px;
+  padding: 18px 35px;
+
   color: white;
   transition: 0.4s;
 }
@@ -252,6 +251,7 @@ main {
   flex-wrap: wrap;
 }
 .vignette-container-inside {
+  position: relative;
   border-radius: 6px;
   box-shadow: 0 2px 14px rgba(126, 87, 88, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
 }
@@ -441,16 +441,19 @@ main {
   padding: 10px 30px;
   position: absolute;
   // position: relative;
-  top: -160px;
+  top: 0px;
 }
 .date-vignette {
   background-color: #6246ea;
   color: white;
   text-align: right;
-  margin-right: 30px;
-  // position: absolute;
+  // margin-right: 30px;
+  position: absolute;
+  border-radius: 6px 0 0 6px;
   // position: relative;
-  top: -105px;
+  top: 118px;
+  padding: 4px;
+  right: 0;
 }
 #contain-teacher h4 {
   font-size: 15px;
@@ -726,4 +729,299 @@ main {
 }
 .sign-in {
   margin-right: 80px;
+}
+#mathSearch {
+  display: flex;
+  flex-direction: row;
+  margin-top: 40px;
+}
+.mathFrom {
+  margin-left: 40px;
+  text-align: center;
+  font-weight: bold;
+}
+.mathTo {
+  margin-left: 30px;
+  text-align: center;
+  font-weight: bold;
+  margin-right: 50px;
+}
+#mathSearch-button {
+  border: none;
+  text-decoration: none;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin-top: 30px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  font: inherit;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.2s;
+}
+#mathSearch-button:hover {
+  background-color: #6246ea;
+  color: white;
+  transition: 0.2s;
+}
+
+#create-new:hover {
+  background-color: #d1d1e9;
+  color: #6246ea;
+  transition: 0.4s;
+}
+#create-new {
+  background: none;
+  background-color: #6246ea;
+  color: whitesmoke;
+  border: none;
+  text-decoration: none;
+  padding: 18px 35px;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: 0.4s;
+}
+.btn-ctn {
+  margin: 40px 0 20px 0;
+}
+
+// Landing styles
+
+.landing-headline {
+  font-size: 4em;
+  // font-weight: 800;
+  padding: 0.2em 0 0.5em 0;
+}
+.landing-catchphrase {
+  font-size: 1.5em;
+  color: #d1d1e9;
+  width: 75%;
+  padding: 0 0 2.5em 0;
+}
+
+.main-block-landing {
+  display: flex;
+  // flex-direction: column;
+  justify-content: space-evenly;
+}
+.landing-cta {
+  width: 200px;
+  margin-right: 3vw;
+  background-color: #6246ea;
+  border-radius: 6px;
+  padding: 20px;
+  padding-right: 50px;
+  padding-left: 50px;
+  color: white;
+  transition: 0.4s;
+  text-decoration: none;
+}
+.landing-cta:hover {
+  background-color: $sec;
+  color: #6246ea;
+  transition: 0.3s;
+}
+
+.img-container-landing {
+  display: flex;
+}
+
+.img-landing {
+  height: 60vh;
+  margin: 10px;
+  padding-top: 2em;
+}
+
+// Profile
+
+.profile-user-pic {
+  width: 300px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.profile-user-pic img {
+  height: 100px;
+  align-self: center;
+  // margin: 0px 33% 25px;
+
+  // padding: 0px 10px;
+}
+
+.profile-input {
+  &:focus {
+    border-color: $purple;
+  }
+  color: #282828;
+  font-family: $font;
+  display: block;
+  width: 100%;
+  // padding-left: 12px;
+  box-sizing: border-box;
+  font-size: 14px;
+  border: 3px solid #000;
+  border-radius: 5px;
+  height: 50px;
+  margin-bottom: 30px;
+
+  text-align: center;
+}
+.profile-form {
+  //   text-align: center;
+  width: 500px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+
+.sign-up-btn {
+  transition: transform 0.2s;
+  transform: translateZ(0);
+  box-sizing: border-box;
+  height: 48px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-color: $purple;
+  border-color: $purple;
+  color: $white;
+  cursor: pointer;
+  width: 300px;
+}
+
+.profile-form-inputs {
+  width: 300px;
+  text-align: left;
+  align-items: flex-start;
+  // margin-top: 20px;
+}
+
+.profile-form-inputs a {
+  text-decoration: none;
+  width: 300px;
+  display: block;
+  // margin-right: 3vw;
+  margin-top: 30px;
+  background-color: #6246ea;
+  border-radius: 6px;
+  padding: 15px;
+  text-align: center;
+  // padding-right: 80px;
+  // padding-left: 80px;
+  color: white;
+  transition: 0.4s;
+  vertical-align: middle;
+}
+
+.profile-form-inputs a:hover {
+  background-color: #d1d1e9;
+  color: #6246ea;
+  transition: 0.3s;
+}
+
+.profile-input-txt {
+  padding: 13px 0px;
+}
+.my-profile-h1 {
+  margin-bottom: 30px;
+}
+
+// Profile Edit
+.form-input {
+  &:focus {
+    border-color: $purple;
+  }
+  color: #282828;
+  font-family: $font;
+  display: block;
+  width: 100%;
+  // padding-left: 12px;
+  box-sizing: border-box;
+  -webkit-user-select: auto;
+  -moz-user-select: auto;
+  -ms-user-select: auto;
+  user-select: auto;
+  font-size: 14px;
+  border: 3px solid #000;
+  border-radius: 5px;
+  height: 50px;
+  margin-bottom: 30px;
+}
+.form-profile-edit {
+  text-align: start;
+  width: 300px;
+  margin: 0;
+  // display: flex;
+  // flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.edit-form-btn {
+  transition: transform 0.2s;
+  transform: translateZ(0);
+  box-sizing: border-box;
+  height: 48px;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  // padding-left: 20px;
+  // padding-right: 20px;
+  background-color: $purple;
+  border-color: $purple;
+  color: $white;
+  cursor: pointer;
+  width: 100%;
+}
+
+.form-profile-edit input {
+  width: 100%;
+  text-align: center;
+  align-items: center;
+}
+
+// .form-profile-el {
+//   width: 80%;
+//   // justify-content: center;
+// }
+
+.profile-edit-box {
+  align-items: center;
+  height: 100px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+#file-edit {
+  width: 300px;
+}
+
+.profile-edit-box label {
+  align-self: center;
+}
+// #file-edit{
+//   margin:5%;
+// }
+
+.inputfile label {
+  align-self: center;
+}
+
+// .form-profile-el{
+//   margin-top: 20px;
+// }
+.my-profile-h1-edit {
+  margin-bottom: 30px;
 }
