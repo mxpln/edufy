@@ -826,16 +826,16 @@ main {
   border-color: #6246ea;
   color: #fffffe;
   cursor: pointer;
-  width: 300px; }
+  width: 400px; }
 
 .profile-form-inputs {
-  width: 300px;
+  width: 400px;
   text-align: left;
   align-items: flex-start; }
 
 .profile-form-inputs a {
   text-decoration: none;
-  width: 300px;
+  width: 400px;
   display: block;
   margin-top: 30px;
   background-color: #6246ea;
@@ -877,7 +877,7 @@ main {
 
 .form-profile-edit {
   text-align: start;
-  width: 300px;
+  width: 400px;
   margin: 0;
   align-items: flex-start;
   justify-content: flex-start; }
@@ -911,7 +911,7 @@ main {
   margin-bottom: 15px; }
 
 #file-edit {
-  width: 300px; }
+  width: 400px; }
 
 .profile-edit-box label {
   align-self: center; }
