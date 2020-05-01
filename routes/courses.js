@@ -4,13 +4,33 @@ const Category = require("../models/Category.js");
 const User = require("../models/User");
 const Course = require("../models/Course.js");
 const upload = require("../config/cloudinary");
-
+const moment = require("moment");
 router.get("/student", (req, res) => {
   Course.find({ participants: { $eq: req.session.currentUser._id } })
     .populate("category")
     .populate({ path: "participants", model: User })
     .populate({ path: "teacher", model: User })
     .then((dbRes) => {
+      let today = new Date();
+
+      let comingCourses = dbRes.filter((course) => {
+        return course.date >= today;
+      });
+      let finalArr = [];
+      let arrayDates = comingCourses.map((oneCourse) => oneCourse.date);
+      let stringifiedDates = new Set(
+        arrayDates.map((oneDate) => oneDate.toString())
+      );
+      console.log(stringifiedDates);
+      stringifiedDates.forEach((date) => {
+        let clusteredCourses = dbRes.filter(
+          (oneCourse) => oneCourse.date.toString() === date
+        );
+        finalArr.push({
+          date: moment(date).format("dddd DD MMMM YYYY"),
+          courses: clusteredCourses,
+        });
+      });
       // User.findById(req.session.currentUser._id)
       //   .populate("courses")
       //   .then((dbResUser) => {
@@ -39,6 +59,7 @@ router.get("/student", (req, res) => {
       //     console.log();
       res.render("my-courses", {
         courses: dbRes,
+        finalArr: finalArr,
       });
     })
     .catch((dbErr) => {

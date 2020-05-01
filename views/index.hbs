@@ -1,10 +1,7 @@
-<h1>{{title}}</h1>
-<h1>Index</h1>
-<p>Chercher par categorie</p>
-
+<h1 class="h1-vlad">What will you learn today ?</h1>
 <form action="/index" method="GET">
-    <div class="select">
-
+    <div>
+        <label for="category">Category</label>
         <select name="category" id="category" class="select">
             <option value="" disabled selected>Choose a category</option>
             {{#each category}}
@@ -18,20 +15,23 @@
     <input type="text" id="to" name="to">
     <button>Submit</button>
 </form>
-
 {{#each finalArr}}
-<h2>{{this.date}}</h2>
+<h2 class="h2-date-vlad">{{this.date}}</h2>
 {{!-- vignette --}}
 <div class="global-vignette-container">
     {{#each courses}}
     <div class="vignette-container">
         <div class="vignette-container-inside">
             <article class="teacher-vignette">
-                <a id="vignette-link" href="/{{this._id}}">
+                <a class="vignette-link" href="/{{this._id}}">
                     <img class="vignette-main-image" src="{{this.image}}" alt="IMG">
-                    <div id="contain" class="cercle"><img class="cercle teacher-image" src="{{this.teacher.image}}" />
+                    <div id="contain-teacher" class="cercle">
+                        <img class="cercle teacher-image" src="{{this.teacher.image}}" />
                         <h4>{{this.teacher.name}} </h4>
                         <h4>{{this.teacher.lastname}}</h4>
+                    </div>
+                    <div>
+                        <h3 class="date-vignette">{{formatDate this.date}}</h3>
                     </div>
             </article>
             <div class="vignette-inside">
@@ -59,10 +59,8 @@
                 {{!-- <button><a href="/{{this._id}}">Discover this course</a></button> --}}
             </div>
         </div>
-
     </div>
     </a>
     {{/each}}
 </div>
-
 {{/each}}

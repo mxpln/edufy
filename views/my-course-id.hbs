@@ -1,24 +1,60 @@
-<h1>my-Course -id</h1>
+<div id="courseID">
+    <div id="courseID-leftPart" class="box-shad">
+        <h3 id="courseID-date">{{formatDate course.date}}</h3>
+        <h2 class="courseID-hour">{{formatHour course.date}}</h2>
+        <h1 id="courseID-title">{{course.title}}</h1>
+        <div id="courseID-catPrice">
+            <p id="courseID-Cat">{{course.category.category}}</p>
+            <h1 id="courseId-price">{{priceUpdate this.participants course.price}}$ / pers</h1>
+        </div>
+        <p id="courseID-description">{{course.description}}</p>
+        {{!-- <li>
+            <h1 id="courseId-price">{{course.price}}$ / pers</h1>
+        </li> --}}
+        {{#each participants}}
+        <img src="{{this.image}}" alt="" id="courseID-participants">
+        {{/each}}
+        <div id="courseID-entireLocation">
+            <p id="courseID-location">Location :</p>
+            <p id="courseID-locationBis">{{course.place}}</p>
+        </div>
+        {{!-- <li>
+            <p>Min people: {{course.minPeople}}</p>
+        </li>
+        <li>
+            <p>Max people : {{course.maxPeople}}</p>
+        </li>
+        <li>
+            <p>{{placesLeft this.participants course.maxPeople}} places left</p>
+        </li> --}}
+        <div id="theButtons">
+            <button id="courseID-edit"><a href="/courses/{{course._id}}/edit">Edit this course</a></button>
 
-<h2>TITLE : {{course.title}}</h2>
-<p>DESCRIPTION :{{course.description}}</p>
-<img src="{{course.image}}" alt="img" />
-<p>DATE : {{formatDate course.date}}</p>
-<p>PRICE : {{course.price}}</p>
-<p>Price update: {{priceUpdate this.participants course.price}}</p>
-<p>CATEGORY : {{course.category.category}}</p>
-<p>PARTICIPANTS : </p>
-
-{{#each participants}}
-<img src="{{this.image}}" alt="">
-{{/each}}
-<p>Teacher: </p><img src="{{course.teacher.image}}" alt="">
-<p>PLACE : {{course.place}}</p>
-<p>MINPEOPLE : {{course.minPeople}}</p>
-<p>MAXPEOPLE : {{course.maxPeople}}</p>
-<p>{{placesLeft this.participants course.maxPeople}} places left</p>
-<button><a href="/courses/{{course._id}}/edit">EDIT</a></button>
-
-<form action="/courses/{{course._id}}/delete" method="POST">
-    <button>Delete this course</button>
-</form>
+            <form action="/courses/{{course._id}}/delete" method="POST">
+                <button id="my-courseID-remove">Delete this course</button>
+            </form>
+            {{!-- {{#if hasCourse}}
+            <form action="/courses/{{course._id}}/remove" method="POST" id="courseID-changeFont">
+                <button id="courseID-remove">Remove this course</button>
+            </form>
+            {{else}}
+            <form action="/courses/{{course._id}}/add" method="POST">
+                <button id="courseID-remove">Add this course</button>
+            </form>
+            {{/if}} --}}
+        </div>
+    </div>
+    <div id="courseID-rightPart">
+        <img src="{{course.image}}" id="courseID-image" alt="IMG">
+        <div class="box-shad" id="courseID-box">
+            <div id="courseID-teacher">
+                <img src="{{course.teacher.image}}" alt="" id="courseID-teacher">
+                <h3 id="courseID-teacherName">{{course.teacher.name}} {{course.teacher.lastname}}</h3>
+            </div>
+            <p id="courseID-teacherDescription">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+                voluptas
+                nihil officia praesentium nemo laborum sint, quaerat, at sed iusto, veritatis similique reprehenderit
+                architecto voluptate perspiciatis! Quia unde iusto cumque!</p>
+        </div>
+    </div>
+</div>

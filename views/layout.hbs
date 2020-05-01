@@ -16,29 +16,28 @@
 
 <body>
 
-  <nav>
-    <h1><a href="/"><img src="/images/logo.svg" id="logo"></a></h1>
-    <ul>
-      {{!-- <li><a href="/">Home</a></li> --}}
-      {{!-- {{#if isLoggedIn}} --}}
-
-      {{#unless isLoggedIn}}
-      <li><a href="/auth/login">Sign-in</a></li>
-      <li><a href="/auth/signup" class="right-button">Sign-up</a></li>
-      {{/unless}}
-
-      {{#if isLoggedIn}}
-      <li><a href="/index" class="nav-line">home</a></li>
-      <li><a href="/courses/student" class="nav-line">my courses</a></li>
-      <li><a href="/courses/prof" class="nav-line">my teaching</a></li>
-      <li><a href="/users/profile/" class="nav-line">profile</a></li>
-      <li><a href="/auth/logout" class="right-button">Log out</a></li>
-      {{/if}}
-      {{user.currentUser}}
-    </ul>
-  </nav>
   <main>
+    <nav>
+      <h1><a href="/"><img src="/images/logo.svg" id="logo"></a></h1>
+      <ul>
+        {{!-- <li><a href="/">Home</a></li> --}}
+        {{!-- {{#if isLoggedIn}} --}}
 
+        {{#unless isLoggedIn}}
+        <li><a href="/auth/login" class="sign-in">Sign-in</a></li>
+        <li><a href="/auth/signup" class="right-button">Sign-up</a></li>
+        {{/unless}}
+
+        {{#if isLoggedIn}}
+        <li><a href="/index" class="nav-line">home</a></li>
+        <li><a href="/courses/student" class="nav-line">my courses</a></li>
+        <li><a href="/courses/prof" class="nav-line">my teaching</a></li>
+        <li><a href="/users/profile/" class="nav-line">profile</a></li>
+        <li><a href="/auth/logout" class="right-button">Log out</a></li>
+        {{/if}}
+        {{user.currentUser}}
+      </ul>
+    </nav>
     {{{body}}}
   </main>
 </body>

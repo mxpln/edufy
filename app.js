@@ -2,7 +2,7 @@ var createError = require("http-errors");
 var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
-const moment = require("moment")
+const moment = require("moment");
 var logger = require("morgan");
 var sassMiddleware = require("node-sass-middleware");
 require("dotenv").config();
@@ -20,8 +20,7 @@ const MongoStore = require("connect-mongo")(session);
 
 var app = express();
 hbs.registerHelper("formatDateForInput", function (date, compare, options) {
-  if (compare === "current")
-    return moment(date).format("YYYY-DD-MMTkk:mm")
+  if (compare === "current") return moment(date).format("YYYY-DD-MMTkk:mm");
   if (compare === "min") return moment().format("YYYY-DD-MMTkk:mm");
 });
 
@@ -34,6 +33,9 @@ hbs.registerHelper("placesLeft", function (arr, max) {
 });
 hbs.registerHelper("priceUpdate", function (par, price) {
   return Math.floor(price / par.length);
+});
+hbs.registerHelper("formatHour", function (date) {
+  return moment(date).format("h:mm");
 });
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

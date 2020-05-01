@@ -1,100 +1,51 @@
-<h1>My courses</h1>
-
-<h1>My courses</h1>
-{{#each courses}}
-<img src="{{this.image}}" alt="img" />
-<ul>
-    <li>{{this.title}}</li>
-    <li>{{this.description}}</li>
-    <li>{{this.price}}</li>
-    <li>Price update: {{priceUpdate this.participants this.price}}</li>
-    <li>{{this.date}}</li>
-    <li>{{this.minPeople}}</li>
-    <li>{{this.maxPeople}}</li>
-    <li>{{this.place}}</li>
-    <li>Teacher: <img src="{{this.teacher.image}}" alt=""></li>
-    {{#each participants}}
-    <li>Participants: <img src="{{this.image}}" alt=""></li>
-    {{/each}}
-    <li>{{this.category.category}}</li>
-    <p>{{placesLeft this.participants this.maxPeople}} places left</p>
-</ul>
-{{!-- <form action="edit/{{this._id}}" method="GET">
-<button> Edit this course</button>
-</form> --}}
-
-<h3><a href="/{{this._id}}">voir ce cours</a></h3>
-
-{{/each}}
-<div>
-
-    {{!-- <section class="future-courses">
-        <h3>Future Courses</h3>
-        {{#each futureCourses}}
-        <ul>
-
-            <li>{{this.description}}</li>
-            <li>{{this.price}}</li>
-            <li>Price update: {{priceUpdate this.participants this.price}}</li>
-            <li>{{formatDate this.date}}</li>
-            <li>{{this.minPeople}}</li>
-            <li>{{this.maxPeople}}</li>
-            <li>{{this.place}}</li>
-            <li>Teacher: <img src="{{this.teacher.image}}" alt=""></li>
-            {{#each participants}}
-            <li>Participants: <img src="{{this.participants.image}}" alt=""></li>
-            {{/each}}
-            <li>{{this.category.category}}</li>
-            <p>{{placesLeft this.participants this.maxPeople}} places left</p>
-            <h3><a href="/{{this._id}}">voir ce cours</a></h3>
-        </ul>
+<h1 class="h1-vlad">My courses</h1>
+{{#each finalArr}}
+<h2 class="h2-date-vlad">{{this.date}}</h2>
+<div class="flex-ctn">
+    <div class="global-vignette-container">
+        {{#each courses}}
+        <div class="vignette-container">
+            <div class="vignette-container-inside">
+                <article class="teacher-vignette">
+                    <a class="vignette-link" href="/{{this._id}}">
+                        <img class="vignette-main-image" src="{{this.image}}" alt="img" />
+                        <div id="contain-teacher" class="cercle">
+                            <img class="cercle teacher-image" src="{{this.teacher.image}}" alt=""></li>
+                            <h4>{{this.teacher.name}} </h4>
+                            <h4>{{this.teacher.lastname}}</h4>
+                        </div>
+                        <div>
+                            <h3 class="date-vignette">{{formatDate this.date}}</h3>
+                        </div>
+                </article>
+                <div class="vignette-inside">
+                    <div class="title-tag">
+                        <div>
+                            <h2>{{this.title}}</h2>
+                        </div>
+                        <div>
+                            <p class="tag">{{this.category.category}}</p>
+                        </div>
+                    </div>
+                    <p class="overflow-ellipsis vignette-description">{{this.description}}</p>
+                    {{!-- <li>{{this.date}}</li> --}}
+                    <div class="vignette-bottom">
+                        <div class="vignette-bottom-left">
+                            {{#each participants}}
+                            <img class="cercle" src="{{this.image}}" />
+                            {{/each}}
+                        </div>
+                        <div class="vignette-bottom-right">
+                            <h2>{{priceUpdate this.participants this.price}}$ / pers </h2>
+                            <p>{{placesLeft this.participants this.maxPeople}} places left</p>
+                        </div>
+                    </div>
+                    {{!-- <h3><a href="/{{this._id}}">voir ce cours</a></h3> --}}
+                </div>
+            </div>
+        </div>
+        </a>
         {{/each}}
-    </section>
+    </div>
 </div>
-<section class="past-courses">
-    <h3>Past Courses</h3>
-    {{#each pastCourses}}
-    {{this.title}}
-    {{this.description}}
-    {{this.price}}
-    {{formatDate this.date}}
-    {{#each participants}}
-    <li>Participants: <img src="{{this.participants.image}}" alt=""></li>
-    {{/each}}
-    {{this.minPeople}}
-    {{this.maxPeople}}
-    {{this.place}}
-    <img src="{{this.image}}" alt="img" />
-    {{this.category.category}}
-    <h3><a href="/{{this._id}}">voir ce cours</a></h3>
-    {{/each}}
-
-</section> --}}
-
-    {{!-- <form action="edit/{{this._id}}" method="GET">
-<button> Edit this course</button>
-</form> --}}
-    {{!-- <a href="/{{this._id}}">voir ce cours</a>
-{{#each courses}}
-<img src="{{this.image}}" alt="img" />
-<ul>
-    <li>{{this.title}}</li>
-    <li>{{this.description}}</li>
-    <li>{{this.price}}</li>
-    <li>Price update: {{priceUpdate this.participants this.price}}</li>
-    <li>{{this.date}}</li>
-    <li>{{this.minPeople}}</li>
-    <li>{{this.maxPeople}}</li>
-    <li>{{this.place}}</li>
-    <li>Teacher: <img src="{{this.teacher.image}}" alt=""></li>
-    {{#each participants}}
-    <li>Participants: <img src="{{this.image}}" alt=""></li>
-    {{/each}}
-    <li>{{this.category.category}}</li>
-    <p>{{placesLeft this.participants this.maxPeople}} places left</p>
-</ul>
-{{!-- <form action="edit/{{this._id}}" method="GET">
-<button> Edit this course</button>
-</form> --}}
-
-    {{!-- {{/each}} --}}
+{{/each}}
